@@ -2,6 +2,68 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.feedback.dao.StudentMapper">
+	<resultMap type="com.feedback.domain.Student" id="student">  
+    </resultMap>
+	<!-- 查询语句 -->
+	
+	<delete id="deleteStudentBySno" parameterType="string">
+		DELETE FROM student WHERE sno = #{sno}
+	</delete>
+	
+	<update id="exchangeStudentStatus" parameterType="java.util.Map">
+		update student set `status`=#{newStatus} where sno=#{sno}
+	</update>
+	
+	<select id="queryManageStudentMaxPageCount" resultType="int" parameterType="java.util.Map">
+        SELECT COUNT(sno) FROM student 
+        <where>
+        	<if test = "sno!=null and sno!=''"> 
+                and sno like CONCAT('%',#{sno},'%')
+            </if> 
+            <if test = "sname!=null and sname!=''"> 
+                and sname like CONCAT('%',#{sname},'%')
+            </if> 
+            <if test="spsw != null and spsw != ''"> 
+                and spsw = #{spsw}
+            </if> 
+            <if test="cnname != null and cnname != ''"> 
+           		and cnname like CONCAT('%',#{cnname},'%')
+            </if> 
+            <!-- -100为com.feedback.FeedBack.util.ManageStudentUtil中的UNDEFINE_STUDENT_STATUS -->
+            <if test="status != -100"> 
+                and status = #{status} 
+            </if> 
+        </where>
+    </select>
+    
+    <!-- 分页条件查询学生列表 -->
+    <select id="queryByPage" parameterType="java.util.Map" resultMap="student">
+        SELECT * FROM student
+        <where>
+        	<if test = "sno!=null and sno!=''"> 
+                and sno like CONCAT('%',#{sno},'%')
+            </if> 
+            <if test = "sname!=null and sname!=''"> 
+                and sname like CONCAT('%',#{sname},'%')
+            </if> 
+            <if test="spsw != null and spsw != ''"> 
+                and spsw = #{spsw}
+            </if> 
+            <if test="cnname != null and cnname != ''"> 
+           		and cnname like CONCAT('%',#{cnname},'%')
+            </if> 
+            <!-- -100为com.feedback.FeedBack.util.ManageStudentUtil中的UNDEFINE_STUDENT_STATUS -->
+            <if test="status != -100"> 
+                and status = #{status} 
+            </if> 
+        </where>
+        LIMIT #{startRow}, #{rowCount}
+    </select>
+    
+    <update id="updateStudent" parameterType="java.util.Map">
+    	update student set sname = #{sname},spsw = #{spsw},cnname=#{cnname} where sno = #{sno}
+    </update>
+    
 	<select id="showStudentInfo" resultType="Student" parameterType="String">
 		select * from student where sno=#{sno}
 	</select>
