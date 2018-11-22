@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.feedback.dao.SendfeedbackMapper">
+	<update id="process" parameterType="FeedbackRecord">
+		UPDATE feedback SET StatusAdm =3 WHERE sno=#{sno} AND ctno=#{ctno} AND fbtime=#{fbtime}
+	</update>
+	
+	<update id="leaderProcess" parameterType="FeedbackRecord">
+		UPDATE feedback SET StatusLeader =3 WHERE sno=#{sno} AND ctno=#{ctno} AND fbtime=#{fbtime}
+	</update>
+	
+	<update id="teacherProcess" parameterType="FeedbackRecord">
+		UPDATE feedback SET StatusTeacher =3 WHERE sno=#{sno} AND ctno=#{ctno} AND fbtime=#{fbtime}
+	</update>
+	
+	<update id="sendtoTeacher" parameterType="FeedbackRecord">
+		UPDATE feedback SET StatusTeacher =1 WHERE sno=#{sno} AND ctno=#{ctno} AND fbtime=#{fbtime}
+	</update>
+	
+	<update id="sendtoLeader" parameterType="FeedbackRecord">
+		UPDATE feedback SET StatusLeader =1 WHERE sno=#{sno} AND ctno=#{ctno} AND fbtime=#{fbtime}
+	</update>
+	
+	<update id="agree" parameterType="FeedbackRecord">
+		UPDATE feedback SET agree =1 WHERE sno=#{sno} AND ctno=#{ctno} AND fbtime=#{fbtime}
+	</update>
+	
+	<update id="disagree" parameterType="FeedbackRecord">
+		UPDATE feedback SET agree =2 WHERE sno=#{sno} AND ctno=#{ctno} AND fbtime=#{fbtime}
+	</update>
+</mapper>

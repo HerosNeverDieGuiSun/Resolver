@@ -34,6 +34,7 @@
         <property name="typeAliasesPackage" value="com.feedback.domain" />
     </bean>
     
+    
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
         <property name="basePackage" value="com.feedback.dao" />
     </bean>
@@ -53,8 +54,13 @@
             value="com.feedback.dao.StudentMapper" />
         <property name="sqlSessionFactory" ref="sqlSessionFactory" />
     </bean>
+
+    <bean id="feedbackRecordMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+        <property name="mapperInterface" value="com.feedback.dao.FeedbackRecordMapper" />
+        <property name="sqlSessionFactory" ref="sqlSessionFactory" />
+    </bean>
     
-   <bean id="inputFileMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+    <bean id="inputFileMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
         <property name="mapperInterface" value="com.feedback.dao.InputFileMapper" />
         <property name="sqlSessionFactory" ref="sqlSessionFactory" />
     </bean>
