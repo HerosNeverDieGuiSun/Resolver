@@ -1,4 +1,12 @@
-<!DOCTYPE html>
+<%@ page language="java" import="com.feedback.domain.*" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import="java.util.*" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page import="com.feedback.domain.*" %>
+<%@ page import="java.sql.*" %>
+<%
+	String path = request.getContextPath();
+%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="en">
 
 <head>
@@ -7,7 +15,7 @@
   <meta name="description" content="">
   <meta name="author" content="Dashboard">
   <meta name="keyword" content="Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
-  <title>Dashio - Bootstrap Admin Template</title>
+  <title>课表查询</title>
 
   <!-- Favicons -->
   <link href="img/favicon.png" rel="icon">
@@ -21,13 +29,10 @@
   <!-- Custom styles for this template -->
   <link href="css/style.css" rel="stylesheet">
   <link href="css/style-responsive.css" rel="stylesheet">
-
-  <!-- =======================================================
-    Template Name: Dashio
-    Template URL: https://templatemag.com/dashio-bootstrap-admin-template/
-    Author: TemplateMag.com
-    License: https://templatemag.com/license/
-  ======================================================= -->
+  <link href="css/Schedule.css" rel="stylesheet">
+  <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+  <script src="lib/Timetables.min.js"></script>
+  
 </head>
 
 <body>
@@ -41,7 +46,7 @@
         <div class="fa fa-bars tooltips" data-placement="right"></div>
       </div>
       <!--logo start-->
-      <a href="index.html" class="logo"><b>教师端</b></a>
+       <a href="index.html" class="logo"><b>教师端</b></a>
       <!--logo end-->
       
       <div class="top-menu">
@@ -81,7 +86,7 @@
               </a>
           </li>
 		  <li class="mt">
-            <a class="active" href="Schedule.html">
+            <a   class="active" href="Schedule.html">
               <i class="fa fa-book"></i>
               <span>课表</span>
               </a>
@@ -99,29 +104,50 @@
     <!--main content start-->
     <section id="main-content">
       <section class="wrapper">
-        <h3><i class="fa fa-angle-right"></i> 课程安排</h3>
-        <!-- page start-->
-        <div class="row mt">
-          <aside class="col-lg-3 mt">
-            <h4><i class="fa fa-angle-right"></i> 所教课程</h4>
-            <div id="external-events">
-              <div class="external-event label label-theme">工程经济学</div>
-              <div class="external-event label label-success">网络及其计算</div>
-              <div class="external-event label label-info">统一建模语言UML</div>
-              <div class="external-event label label-warning">软件需求分析</div>
-            </div>
-            <p class="drop-after">
-              <input type="checkbox" id="drop-remove"> 拖动后删除</input>
-            </p>
-          </aside>
-          <aside class="col-lg-9 mt">
-            <section class="panel">
-              <div class="panel-body">
-                <div id="calendar" class="has-toolbar"></div>
-              </div>
-            </section>
-          </aside>
-        </div>
+      <div id="coursesTable"></div>
+        <script>
+		  var courseList = [
+		    ['大学英语(Ⅳ)@10203', '大学英语(Ⅳ)@10203', '', '', '', '', '毛概@14208', '毛概@14208', '', ''],
+		    ['', '', '信号与系统@11302', '信号与系统@11302', '模拟电子技术基础@16204', '模拟电子技术基础@16204', '', '', '', ''],
+		    ['大学体育(Ⅳ)', '大学体育(Ⅳ)', '形势与政策(Ⅳ)@15208', '形势与政策(Ⅳ)@15208', '', '', '电路、信号与系统实验', '电路、信号与系统实验', '', ''],
+		    ['', '', '', '', '电装实习@11301', '电装实习@11301', '', '', ''],
+		    ['', '', '数据结构与算法分析', '数据结构与算法分析', '', '', '', '', '信号与系统', '信号与系统'],
+		  ];
+		  var week = window.innerWidth > 360 ? ['周一', '周二', '周三', '周四', '周五','周六','周日'] :
+		    ['一', '二', '三', '四', '五','六','七'];
+		  var day = new Date().getDay();
+		  var courseType = [
+		    [{index: '1', name: '8:10'}, 1],
+		    [{index: '2', name: '10:00'}, 1],
+		    [{index: '3', name: '10:20'}, 1],
+		    [{index: '4', name: '12:10'}, 1],
+		    [{index: '5', name: '2:00'}, 1],
+		    [{index: '6', name: '15:50'}, 1],
+		    [{index: '7', name: '4:00'}, 1],
+		    [{index: '8', name: '17:50'}, 1],
+		    [{index: '9', name: '19:00'}, 1],
+		    [{index: '10', name: '20:50'}, 1],
+		    
+		  ];
+		  // 实例化(初始化课表)
+		  var Timetable = new Timetables({
+		    el: '#coursesTable',
+		    timetables: courseList,
+		    week: week,
+		    timetableType: courseType,
+		    highlightWeek: day,
+		    gridOnClick: function (e) {
+		      alert(e.name + '  ' + e.week + ', 第' + e.index + '节课, 课长' + e.length + '节');
+		      console.log(e);
+		    },
+		    styles: {
+		      Gheight: 50
+		    }
+		  });
+
+ 
+
+		</script>
         <!-- page end-->
       </section>
       <!-- /wrapper -->
