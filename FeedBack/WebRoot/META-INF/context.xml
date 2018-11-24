@@ -8,6 +8,6 @@
         maxWait="5000" 
         username="root" 
         password="123456"  
-        url="jdbc:mysql://localhost:3306/FeedBack?useSSl=false&amp;serverTimezone=Hongkong"
+        url="jdbc:mysql://localhost:3306/feedback_2?useSSl=false&amp;serverTimezone=Hongkong"
         maxActive="4"/> 
 </Context>

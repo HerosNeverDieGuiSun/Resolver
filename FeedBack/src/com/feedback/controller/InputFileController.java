@@ -55,6 +55,37 @@ public class InputFileController {
 		return "redirect:/GetTeacherInServlet";
 	}
 	
+	@RequestMapping(value="/superAdm/AdmInfoInputServlet", method=RequestMethod.POST)
+	public String AdmInfoInput(MultipartFile file, Model model, HttpServletRequest request) {
+		String UPLOAD_PATH = "uploadFiles/";
+		if (file == null) return "redirect:/GetAdmInServlet";
+		if (file.getOriginalFilename().equals("")) return "redirect:/GetAdmInServlet";
+		
+		//设置上传文件的保存目录
+		String path = request.getServletContext().getRealPath(".");
+		path += "/" + UPLOAD_PATH;
+		File newfile = new File(path);
+		if (!newfile.exists()) {
+			newfile.mkdirs();
+		}
+		
+		// 修改文件名
+		String filename = file.getOriginalFilename();
+		String newname = System.currentTimeMillis() + "-" + filename;
+		
+		try {
+			//保存到path下的名字为newname的文件
+			file.transferTo(new File(path, newname));
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		inputFileService.inputAdmInfo(file, path + newname);
+		
+		return "redirect:../AdmManageController/listAllAdmByPage";
+	}
+	
 	@RequestMapping(value="/StudentInfoInputServlet")
 	public String StudentInfoInput(MultipartFile file, Model model, HttpServletRequest request) {
 		String UPLOAD_PATH = "uploadFiles/";
