@@ -64,7 +64,10 @@
         <property name="mapperInterface" value="com.feedback.dao.InputFileMapper" />
         <property name="sqlSessionFactory" ref="sqlSessionFactory" />
     </bean>
-    
+    <bean id="scheduleMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+        <property name="mapperInterface" value="com.feedback.dao.ScheduleMapper" />
+        <property name="sqlSessionFactory" ref="sqlSessionFactory" />
+    </bean>
     <context:component-scan base-package="com.feedback" />
     <mvc:annotation-driven />   <!-- 必须放在此文件中 -->
     

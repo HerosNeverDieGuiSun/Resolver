@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.feedback.dao.ScheduleMapper">
+	<select id="showCname" resultType="Schedule" parameterType="String">
+		select cname from course where cno=(
+			select cno from classteach where ctno=(
+				select ctno from teachin where tino=#{tino}));
+		
+		
+	</select>
+	<select id="showCourseInfo" resultType="Schedule" parameterType="String">
+		select `add`,startweek,endweek,day,startsection,endsection from classtimeadd where ctno=
+			(select ctno from teachin where tino=#{tino});
+	</select>
+	
+	
+</mapper>

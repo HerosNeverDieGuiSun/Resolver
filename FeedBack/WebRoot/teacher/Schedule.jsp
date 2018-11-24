@@ -18,20 +18,20 @@
   <title>课表查询</title>
 
   <!-- Favicons -->
-  <link href="img/favicon.png" rel="icon">
-  <link href="img/apple-touch-icon.png" rel="apple-touch-icon">
+  <link href="<%=path%>/teacher/img/favicon.png" rel="icon">
+  <link href="<%=path%>/teacher/img/apple-touch-icon.png" rel="apple-touch-icon">
 
   <!-- Bootstrap core CSS -->
-  <link href="lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="<%=path%>/teacher/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <!--external css-->
-  <link href="lib/font-awesome/css/font-awesome.css" rel="stylesheet" />
-  <link href="lib/fullcalendar/bootstrap-fullcalendar.css" rel="stylesheet" />
+  <link href="<%=path%>/teacher/lib/font-awesome/css/font-awesome.css" rel="stylesheet" />
+  <link href="<%=path%>/teacher/lib/fullcalendar/bootstrap-fullcalendar.css" rel="stylesheet" />
   <!-- Custom styles for this template -->
-  <link href="css/style.css" rel="stylesheet">
-  <link href="css/style-responsive.css" rel="stylesheet">
-  <link href="css/Schedule.css" rel="stylesheet">
+  <link href="<%=path%>/teacher/css/style.css" rel="stylesheet">
+  <link href="<%=path%>/teacher/css/style-responsive.css" rel="stylesheet">
+  <link href="<%=path%>/teacher/css/Schedule.css" rel="stylesheet">
   <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
-  <script src="lib/Timetables.min.js"></script>
+  <script src="<%=path%>/teacher/lib/Timetables.min.js"></script>
   
 </head>
 
@@ -64,7 +64,7 @@
       <div id="sidebar" class="nav-collapse ">
         <!-- sidebar menu start-->
         <ul class="sidebar-menu" id="nav-accordion">
-          <p class="centered"><a href="profile.html"><img src="img/wuyanzu.jpg" class="img-circle" width="80"></a></p>
+          <p class="centered"><a href="profile.html"><img src="<%=path%>/teacher/img/wuyanzu.jpg" class="img-circle" width="80"></a></p>
           <h5 class="centered">小明</h5>
           
           <li class="mt">
@@ -105,14 +105,14 @@
     <section id="main-content">
       <section class="wrapper">
       <div id="coursesTable"></div>
+        
         <script>
-		  var courseList = [
-		    ['大学英语(Ⅳ)@10203', '大学英语(Ⅳ)@10203', '', '', '', '', '毛概@14208', '毛概@14208', '', ''],
-		    ['', '', '信号与系统@11302', '信号与系统@11302', '模拟电子技术基础@16204', '模拟电子技术基础@16204', '', '', '', ''],
-		    ['大学体育(Ⅳ)', '大学体育(Ⅳ)', '形势与政策(Ⅳ)@15208', '形势与政策(Ⅳ)@15208', '', '', '电路、信号与系统实验', '电路、信号与系统实验', '', ''],
-		    ['', '', '', '', '电装实习@11301', '电装实习@11301', '', '', ''],
-		    ['', '', '数据结构与算法分析', '数据结构与算法分析', '', '', '', '', '信号与系统', '信号与系统'],
-		  ];
+        	//var arr ='${json}';
+        	//var courseList=JSON.parse( arr );
+		  var courseList = ${json};
+		  
+		  console.log(courseList);
+		 console.log("ssss");
 		  var week = window.innerWidth > 360 ? ['周一', '周二', '周三', '周四', '周五','周六','周日'] :
 		    ['一', '二', '三', '四', '五','六','七'];
 		  var day = new Date().getDay();
