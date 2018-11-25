@@ -83,16 +83,16 @@
               <span>个人信息</span>
               </a>
           </li>
-		  <li class="mt">
-             <a  href="MsgSubmit.html">
+		   <li class="mt">
+             <a  href="SendCollegeMsg.jsp">
               <i class="fa fa-envelope"></i>
-              <span>提交反馈</span>
+              <span>提交关于学院的反馈</span>
               </a>
           </li>
-		  <li class="mt">
-            <a  href="MsgSubmit.html">
+          <li class="mt">
+             <a  href="../StudentCtrl/SelectStudentCourseCtrl">
               <i class="fa fa-envelope"></i>
-              <span>查看反馈回复</span>
+              <span>提交关于老师的反馈</span>
               </a>
           </li>
 		  

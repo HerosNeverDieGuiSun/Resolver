@@ -49,7 +49,10 @@ public class StudentManageController {
 		map.put("sname", (String)request.getParameter("studentName"));
 		map.put("spsw",(String) request.getParameter("studentPassword"));
 		map.put("cnname",(String)request.getParameter("studentClass"));
-		
+		System.out.println( (String) request.getParameter("studentNumber")+"l");
+		System.out.println( (String)request.getParameter("studentName")+"l");
+		System.out.println( (String) request.getParameter("studentPassword"));
+		System.out.println( (String)request.getParameter("studentClass"));
 		studentManageService.updateStudent(map);
 		String redirectURL = "redirect:/StudentManageController/listAllStudentByPage?page="+page;
 		return redirectURL;

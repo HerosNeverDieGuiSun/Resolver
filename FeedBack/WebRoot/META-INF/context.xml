@@ -1,5 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <Context>
+
   	<Resource
   		name="jdbc/feedback_2"
   		auth="Container"
@@ -11,4 +12,5 @@
   		password="zheng85673062"
   		driverClassName="com.mysql.cj.jdbc.Driver"
   		url="jdbc:mysql://localhost:3306/feedback_2?serverTimezone=Hongkong" />
+
 </Context>

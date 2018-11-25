@@ -4,6 +4,7 @@ import java.io.File;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.security.auth.message.callback.PrivateKeyCallback.Request;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -55,6 +56,71 @@ public class InputFileController {
 		return "redirect:/GetTeacherInServlet";
 	}
 	
+
+	@RequestMapping(value="/superAdm/AdmInfoInputServlet", method=RequestMethod.POST)
+	public String AdmInfoInput(MultipartFile file, Model model, HttpServletRequest request) {
+		String UPLOAD_PATH = "uploadFiles/";
+		if (file == null) return "redirect:/GetAdmInServlet";
+		if (file.getOriginalFilename().equals("")) return "redirect:/GetAdmInServlet";
+	
+		//设置上传文件的保存目录
+		String path = request.getServletContext().getRealPath(".");
+		path += "/" + UPLOAD_PATH;
+		File newfile = new File(path);
+		if (!newfile.exists()) {
+			newfile.mkdirs();
+		}
+		
+		// 修改文件名
+		String filename = file.getOriginalFilename();
+		String newname = System.currentTimeMillis() + "-" + filename;
+		
+		try {
+			//保存到path下的名字为newname的文件
+			file.transferTo(new File(path, newname));
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+
+		inputFileService.inputAdmInfo(file, path + newname);
+		
+		return "redirect:../AdmManageController/listAllAdmByPage";
+
+		
+
+	}
+@RequestMapping(value="/admin/ClasstimeAddInfoInputServlet", method=RequestMethod.POST)
+public String ClasstimeAddInfoInput(MultipartFile file, Model model, HttpServletRequest request) {
+	String UPLOAD_PATH = "uploadFiles/";
+	if (file == null) return "redirect:/ClasstimeAddManageController/listAllClasstimeAddByPage";
+	if (file.getOriginalFilename().equals("")) return "redirect:/ClasstimeAddManageController/listAllClasstimeAddByPage";
+		//设置上传文件的保存目录
+			String path = request.getServletContext().getRealPath(".");
+			path += "/" + UPLOAD_PATH;
+			File newfile = new File(path);
+			if (!newfile.exists()) {
+				newfile.mkdirs();
+			}
+			
+			// 修改文件名
+			String filename = file.getOriginalFilename();
+			String newname = System.currentTimeMillis() + "-" + filename;
+			
+			try {
+				//保存到path下的名字为newname的文件
+				file.transferTo(new File(path, newname));
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+
+	inputFileService.inputClasstimeAddInfo(file, path + newname);
+	
+	return "redirect:/ClasstimeAddManageController/listAllClasstimeAddByPage";
+}
+	
 	@RequestMapping(value="/StudentInfoInputServlet")
 	public String StudentInfoInput(MultipartFile file, Model model, HttpServletRequest request) {
 		String UPLOAD_PATH = "uploadFiles/";
@@ -85,6 +151,15 @@ public class InputFileController {
 		return "redirect:/GetTeacherInServlet";
 	}
 	
+	@RequestMapping(value="/teacher/GetTeacherOutServlet")
+	public String getTeacherOut(Model model,HttpSession session) {
+		
+		TeacherOut t = new TeacherOut("2016215001","1","徐本柱","2","院内","555","5","56"
+				,"5565","665","555","2016215201","555","222");
+		model.addAttribute("teacherout", t);
+		session.setAttribute("teacherout", t);
+		return "teacher/TeacherOutInfo";
+	}
 	@RequestMapping(value="/GetTeacherInServlet")
 	public String getAllTeacher(Model model, HttpSession session) {
 		session.removeAttribute("TeacherInState");
