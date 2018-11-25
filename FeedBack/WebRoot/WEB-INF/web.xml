@@ -36,6 +36,7 @@
     <filter-name>LoginFilter</filter-name>
     <filter-class>com.feedback.filter.LoginFilter</filter-class>
   </filter>
+  <!--
   <filter-mapping>
     <filter-name>LoginFilter</filter-name>
     <url-pattern>/admin/*</url-pattern>
@@ -48,14 +49,16 @@
     <filter-name>LoginFilter</filter-name>
     <url-pattern>/student/*</url-pattern>
   </filter-mapping>
-  <filter-mapping>
+    <filter-mapping>
     <filter-name>LoginFilter</filter-name>
     <url-pattern>/teacher/*</url-pattern>
   </filter-mapping>
+ 
   <filter-mapping>
     <filter-name>LoginFilter</filter-name>
     <url-pattern>/superAdm/*</url-pattern>
   </filter-mapping>
+   -->
   <servlet>
     <servlet-name>SpringDispatcher</servlet-name>
     <servlet-class>

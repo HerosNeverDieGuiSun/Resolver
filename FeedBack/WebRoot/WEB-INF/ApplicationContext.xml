@@ -70,8 +70,6 @@
         <property name="sqlSessionFactory" ref="sqlSessionFactory" />
     </bean>
 
-    
-
     <bean id="loginMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
         <property name="mapperInterface" value="com.feedback.dao.LoginMapper" />
         <property name="sqlSessionFactory" ref="sqlSessionFactory" />
@@ -89,7 +87,7 @@
             value="com.feedback.dao.StudentCourseMapper" />
         <property name="sqlSessionFactory" ref="sqlSessionFactory" />
     </bean>
->>>>>>> 240792b4f3f7978eda0e0768029a785424959ea4
+
     <context:component-scan base-package="com.feedback" />
     <mvc:annotation-driven />   <!-- 必须放在此文件中 -->
     
