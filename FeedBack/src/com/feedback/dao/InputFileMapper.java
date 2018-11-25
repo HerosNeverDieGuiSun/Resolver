@@ -13,6 +13,7 @@ public interface InputFileMapper {
 	public void inputTeacherIn(Map<String, Object> map);
 	public void inputTeacherOut(Map<String, Object> map);
 	public void inputTeacherSchool(Map<String, Object> map);
+	public void inputLeader(Map<String, Object> map);
 	public List<TeacherIn> getTeacherIn(Map<String, Object> map);
 	public List<TeacherOut> getTeacherOut(Map<String, Object> map);
 	public List<TeacherSchool> getTeacherSchool(Map<String, Object> map);
@@ -21,9 +22,18 @@ public interface InputFileMapper {
 	public int queryTSMaxCount();
 	public void inputStudentInfo(Map<String, Object> map);
 
+
 	public void inputAdmInfo(Map<String, Object> map);
 	
 
 	public void inputClasstimeAddInfo(Map<String, Object> map);
+
+
+	public void updateTeacherInInfo(Map<String,Object> map);
+	public void updateTeacherOutInfo(Map<String,Object> map);
+	public void updateTeacherSchoolInfo(Map<String,Object> map);
+	public void deleteTeacherIn(String tino);
+	public void deleteTeacherSchool(String tsno);
+	public void deleteTeacherOut(String tono);
 
 }

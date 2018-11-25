@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <root>
   <facet id="me.spring">
     <node name="libprov">
@@ -5,3 +6,12 @@
     </node>
   </facet>
 </root>
+=======
+<root>
+  <facet id="me.spring">
+    <node name="libprov">
+      <attribute name="provider-id" value="spring-no-op-library-provider"/>
+    </node>
+  </facet>
+</root>
+>>>>>>> 47d064c319d7bfa0babde8309992f2baa7df9bb2

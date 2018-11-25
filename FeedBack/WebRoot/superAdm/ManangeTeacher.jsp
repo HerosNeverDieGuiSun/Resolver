@@ -47,6 +47,34 @@
 	function loadFile2(file){
 		  $("#filename2").html(file.name);
 	}
+	
+	//触发模态框的同时调用此方法
+	function editInfo(obj,type) {
+		
+		var tr = obj.parentNode.parentNode;
+		
+		var teacherNumber = tr.cells[0].innerText;
+		var teacherName = tr.cells[1].innerText;
+		
+		var teacherProfession = tr.cells[2].innerText;
+		var teacherTelephone = tr.cells[3].innerText;
+
+		//向模态框中传值
+		$('#teacher_number').val(teacherNumber);
+		$('#teacher_name').val(teacherName);
+		$('#teacher_profession').val(teacherProfession);
+		$('#teacher_telephone').val(teacherTelephone);
+		
+		if(type == "1" || type == 1){ //院内老师
+			$("#updateTeacherInfoForm").attr("action", "./InputFileController/updateTeacherInInfo");
+		}else if(type == "2" || type == 2){ //校内老师
+			$("#updateTeacherInfoForm").attr("action", "./InputFileController/updateTeacherSchoolInfo");
+		}else if(type == "3" || type == 3){ //外聘老师
+			$("#updateTeacherInfoForm").attr("action", "./InputFileController/updateTeacherOutInfo");
+		}
+		
+		$('#teacherModal').modal('show');
+	}
 	</script>
 </head>
 
@@ -132,8 +160,8 @@
 	                    <td>${ list.tiprofession }</td>
 	                    <td class="hidden-phone">${ list.title }</td>
 	                    <td>
-	                      <button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button>
-	                      <button class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i></button>
+	                      <button onclick="editInfo(this,1);" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button>
+	                      <a href="./InputFileController/deleteTeacherIn?tino=${list.tino }"><button class="btn btn-danger btn-xs" class="btn btn-info btn-xs" data-toggle="tooltip" data-placement="top" title="删除"><i class="fa fa-trash-o " ></i></button></a>
 	                    </td>
 				  	</tr>
 				  </c:forEach>
@@ -191,8 +219,8 @@
 	                    <td>${ list.tsprofession }</td>
 	                    <td class="hidden-phone">${ list.tstel }</td>
 	                    <td>
-	                      <button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button>
-	                      <button class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i></button>
+	                      <button onclick="editInfo(this,2);" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button>
+						  <a href="./InputFileController/deleteTeacherSchool?tsno=${list.tsno }"><button class="btn btn-danger btn-xs" class="btn btn-info btn-xs" data-toggle="tooltip" data-placement="top" title="删除"><i class="fa fa-trash-o " ></i></button></a>
 	                    </td>
 				  	</tr>
 				  </c:forEach>
@@ -248,8 +276,8 @@
 	                    <td>${ list.toprofession }</td>
 	                    <td class="hidden-phone">${ list.totel }</td>
 	                    <td>
-	                      <button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button>
-	                      <button class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i></button>
+	                      <button onclick="editInfo(this,3);" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button>
+						  <a href="./InputFileController/deleteTeacherOut?tono=${list.tono }"><button class="btn btn-danger btn-xs" class="btn btn-info btn-xs" data-toggle="tooltip" data-placement="top" title="删除"><i class="fa fa-trash-o " ></i></button></a>
 	                    </td>
 				  	</tr>
 				  </c:forEach>
@@ -277,6 +305,42 @@
 	    				&nbsp;&nbsp;<span id="filename2" style="vertical-align: middle">未上传文件</span>
 	    				&nbsp;&nbsp;<button type="submit" class="btn btn-info">导入外聘教师信息</button>			
 					</form:form>
+				</div>
+				<!-- 模态弹出窗 -->
+				<div class="modal fade" id="teacherModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+				  <div class="modal-dialog" role="document">
+					<div class="modal-content">
+					  <!-- 标题栏 -->
+					  <div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						<h4 class="modal-title" id="exampleModalLabel">老师信息</h4>
+					  </div>
+					  <form method="POST" id="updateTeacherInfoForm" name="updateTeacherInfoForm" action="../StudentManageController/updateStudentInfo?page=${manageStudentQueryState.curPage}">
+					  <div class="modal-body">
+						  <div class="form-group">
+							<label for="recipient-name" class="control-label">教工号:</label>
+							<input type="text" class="form-control" id="teacher_number" name="teacherNumber"  readonly="readonly">
+						  </div>
+						  <div class="form-group">
+							<label for="message-text" class="control-label">教师姓名:</label>
+							<input type="text" class="form-control" id="teacher_name" name="teacherName">
+						  </div>
+						  <div class="form-group">
+							<label for="message-text" class="control-label">职称:</label>
+							<input type="text" class="form-control" id="teacher_profession" name="teacherProfession">
+						  </div>
+						  <div class="form-group">
+							<label for="recipient-name" class="control-label">联系电话:</label>
+							<input type="text" class="form-control" id="teacher_telephone" name="teacherTelephone">
+						  </div>
+					  </div>
+					  <div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+						<input type="submit" class="btn btn-primary" value="确认修改 "></submits>
+					  </div>
+					  </form>
+					</div>
+				  </div>
 				</div>
            	</div>
             <!-- /content-panel -->
