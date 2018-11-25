@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.feedback.dao.ClasstimeAddMapper">
+	<resultMap type="com.feedback.domain.ClasstimeAdd" id="classtimeAdd">  
+    </resultMap>
+	<!-- 查询语句 -->
+	
+	<delete id="deleteClasstimeAdd" parameterType="java.util.Map">
+		DELETE FROM classtimeadd WHERE ctno = #{ctno} AND `add`= #{add} AND startweek= #{startweek} AND endweek= #{endweek} AND day= #{day}
+	</delete>
+	
+	
+	<select id="queryManageClasstimeAddMaxPageCount" resultType="int">
+        SELECT COUNT(*) FROM classtimeadd 
+    </select>
+    
+    <select id="queryByPage"  parameterType="java.util.Map" resultMap="classtimeAdd">
+        SELECT * FROM classtimeadd LIMIT #{startRow}, #{rowCount}
+    </select>
+    
+    <update id="updateClasstimeAdd" parameterType="java.util.Map">
+        UPDATE classtimeadd set startsection=#{startsection},endsection=#{endsection} where ctno=#{ctno} AND `add`=#{add} and startweek=#{startweek} and endweek=#{endweek} and day=#{day}
+    	
+    </update>
+    
+	
+	
+</mapper>

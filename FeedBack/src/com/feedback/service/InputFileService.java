@@ -301,10 +301,17 @@ public class InputFileService {
 			e.printStackTrace();
 		}
 	
+
 	}
 
 	public void inputAdmInfo(MultipartFile file, String path) {
 		// TODO Auto-generated method stub
+
+	}	
+	
+	public void inputClasstimeAddInfo(MultipartFile file, String path) {
+		
+
 		try {
 			FileInputStream fileInputStream = new FileInputStream(path);
 			BufferedInputStream bufferedInputStream = new BufferedInputStream(fileInputStream);
@@ -317,6 +324,7 @@ public class InputFileService {
 			for (int i = 1; i <= lastRowIndex; i++) {
 				XSSFRow row = sheet.getRow(i);
 				if (row == null) break;
+
 			
 				row.getCell(0).setCellType(CellType.STRING);
 				row.getCell(1).setCellType(CellType.STRING);
@@ -324,12 +332,29 @@ public class InputFileService {
 				map.put("admpsw", row.getCell(1).getStringCellValue());
 				
 				inputFileDao.inputAdmInfo(map);
+
+				row.getCell(0).setCellType(CellType.STRING);
+				map.put("ctno", row.getCell(0).getStringCellValue());
+				map.put("add", row.getCell(1).getStringCellValue());
+				map.put("startweek", row.getCell(2).getNumericCellValue());
+				map.put("endweek", row.getCell(3).getNumericCellValue());
+				map.put("day", row.getCell(4).getNumericCellValue());
+				map.put("startsection", row.getCell(5).getNumericCellValue());
+				map.put("endsection", row.getCell(6).getNumericCellValue());
+				
+				inputFileDao.inputClasstimeAddInfo(map);
+
 			}
 			bufferedInputStream.close();
 			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+
 	}
 
-}
+
+	
+	}	
+
+

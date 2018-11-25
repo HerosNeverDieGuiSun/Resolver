@@ -76,6 +76,7 @@
     </bean>
     
 
+
     <bean id="feedbackMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
         <property name="mapperInterface" 
             value="com.feedback.dao.FeedbackMapper" />
@@ -87,6 +88,13 @@
             value="com.feedback.dao.StudentCourseMapper" />
         <property name="sqlSessionFactory" ref="sqlSessionFactory" />
     </bean>
+
+
+     <bean id="classtimeAddMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+        <property name="mapperInterface" value="com.feedback.dao.ClasstimeAddMapper" />
+        <property name="sqlSessionFactory" ref="sqlSessionFactory" />
+    </bean>
+    
 
     <context:component-scan base-package="com.feedback" />
     <mvc:annotation-driven />   <!-- 必须放在此文件中 -->
