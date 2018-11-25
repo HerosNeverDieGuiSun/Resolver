@@ -82,9 +82,9 @@ public class StudentController {
              } catch (IOException e) {
                  e.printStackTrace();
              }
-             return "redirect:../StudentCtrl/text";
+             return "student/StudentInfo";
          } else {
-             return "redirect:../StudentCtrl/ListStudentInfo";
+             return "student/StudentInfo";
          }
 		
 		
@@ -92,7 +92,7 @@ public class StudentController {
 	@RequestMapping(value="text")
 	public String text(HttpServletRequest request,HttpSession session){
 		System.out.println("successs to text");
-		return "redirect:../StudentCtrl/ListStudentInfo";
+		return "student/StudentInfo";
 	}
 	
 }
