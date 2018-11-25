@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.feedback.dao.LoginMapper">
+
+	<select id="selectStudent" resultType="Student">
+		select * from student where sno=#{sno} and spsw=#{spsw}
+	</select>
+	
+	<select id="selectTeacherIn" resultType="TeacherIn">
+		select * from teacherin where tino=#{tino} and tipsw=#{tipsw}
+	</select>
+	
+	<select id="selectTeacherOut" resultType="TeacherOut">
+		select * from teacherout where tono=#{tono} and topsw=#{topsw}
+	</select>
+	
+	<select id="selectTeacherSchool" resultType="TeacherSchool">
+		select * from teacherschool where tsno=#{tsno} and tspsw=#{tspsw}
+	</select>
+	
+	<select id="selectLeader" resultType="Leader">
+		select * from leader where lno=#{lno} and lpsw=#{lpsw}
+	</select>
+	
+	<select id="selectSuperAdm" resultType="SuperAdm">
+		select * from superadm where superno=#{superno} and superpsw=#{superpsw}
+	</select>
+	
+</mapper>
