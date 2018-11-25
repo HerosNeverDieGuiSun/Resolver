@@ -56,4 +56,7 @@
 	<select id="queryTSMaxCount" resultType="int">
 		select count(tsno) from teacherschool
 	</select>
+	<insert id="inputClasstimeAddInfo" parameterType="java.util.Map" useGeneratedKeys="true" keyProperty="ClasstimeAdd">
+        insert into classtimeadd (ctno,`add`,startweek,endweek,day,startsection,endsection) values (#{ctno}, #{add}, #{startweek}, #{endweek},#{day},#{startsection}, #{endsection})
+	</insert>
 </mapper>

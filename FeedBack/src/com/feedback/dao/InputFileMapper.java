@@ -20,4 +20,5 @@ public interface InputFileMapper {
 	public int queryTOMaxCount();
 	public int queryTSMaxCount();
 	public void inputStudentInfo(Map<String, Object> map);
+	public void inputClasstimeAddInfo(Map<String, Object> map);
 }
