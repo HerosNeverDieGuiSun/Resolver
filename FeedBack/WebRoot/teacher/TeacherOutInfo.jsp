@@ -1,6 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
+<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
 
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%
+String path = request.getContextPath();
+String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -108,151 +115,91 @@
           <!--  DATE PICKERS -->
           <div class="col-lg-12">
             <div class="form-panel">
-              <form action="#" class="form-horizontal style-form">
+			<jsp:useBean id="teacherout" scope="request" class="com.feedback.domain.TeacherOut" />
+              	<form:form modelAttribute="teacherout" action="#" class="form-horizontal style-form" method="POST">
+              	<div class="form-group">
+                  <label class="control-label col-md-3">教工号</label>
+                  <div class="col-md-3 col-xs-11">
+                    <form:input path="tono" class="form-control" readonly="true"/>
+                  </div>
+                </div>
+                
                 <div class="form-group">
                   <label class="control-label col-md-3">姓名</label>
                   <div class="col-md-3 col-xs-11">
-                    <input type="text" class="form-control" value="小明">
-                    
+                    <form:input path="toname" class="form-control" readonly="true"/>
                   </div>
                 </div>
+                
 				<div class="form-group">
-                  <label class="control-label col-md-3">单位或学院</label>
+                  <label class="control-label col-md-3">工作单位</label>
                   <div class="col-md-3 col-xs-11">
-                    <input type="text" class="form-control" value="软件学院">
-                    
+                    <form:input path="toinstitution" class="form-control" readonly="true"/>
                   </div>
                 </div>
+                
 				<div class="form-group">
                   <label class="control-label col-md-3">类型</label>
                   <div class="col-md-3 col-xs-11">
-                    <input type="text" class="form-control" value="校内教师">
-                    
+                    <form:input path="totype" class="form-control" readonly="true"/>
                   </div>
                 </div>
-				<div class="form-group">
-                  <label class="control-label col-md-3">教授课程</label>
-                  <div class="col-md-3 col-xs-11">
-                    <input type="text" class="form-control" value="软件工程">
-                    
-                  </div>
-                </div>
+                
 				<div class="form-group">
                   <label class="control-label col-md-3">职称</label>
                   <div class="col-md-3 col-xs-11">
-                    <input type="text" class="form-control" value="教授">
-                    
+                    <form:input path="toprofession" class="form-control" readonly="true"/>
                   </div>
                 </div>
+                
 				<div class="form-group">
                   <label class="control-label col-md-3">学位</label>
                   <div class="col-md-3 col-xs-11">
-                    <input type="text" class="form-control" value="博士">
-                    
+                    <form:input path="toscholar" class="form-control" readonly="true"/>
+                  </div>
+                </div>
+                
+				<div class="form-group">
+                  <label class="control-label col-md-3">从业年限</label>
+                  <div class="col-md-3 col-xs-11">
+                    <form:input path="toyear" class="form-control" readonly="true"/>
+                  </div>
+                </div>
+                
+				<div class="form-group">
+                  <label class="control-label col-md-3">毕业学校</label>
+                  <div class="col-md-3 col-xs-11">
+                    <form:input path="toschool" class="form-control" readonly="true"/>
                   </div>
                 </div>
 				<div class="form-group">
-                  <label class="control-label col-md-3">年龄</label>
+                  <label class="control-label col-md-3">主要技术专长</label>
                   <div class="col-md-3 col-xs-11">
-                    <input type="text" class="form-control" value="40">
-                    
+                    <form:input path="totech" class="form-control" readonly="true"/>
                   </div>
                 </div>
+                
 				<div class="form-group">
-                  <label class="control-label col-md-3">毕业院校</label>
+                  <label class="control-label col-md-3">担任过的工程项目</label>
                   <div class="col-md-3 col-xs-11">
-                    <input type="text" class="form-control" value="合肥工业大学">
-                    
+                    <form:textarea path="towork" class="form-control" readonly="true"/>
                   </div>
                 </div>
+                
 				<div class="form-group">
-                  <label class="control-label col-md-3">海外经历</label>
+                  <label class="control-label col-md-3">获得实践技术能力证书</label>
                   <div class="col-md-3 col-xs-11">
-                    <textarea  class="form-control" >2001年-2003年在哈佛学习</textarea>
-                    
+                    <form:textarea path="tolicense"  class="form-control" readonly="true" />
                   </div>
-				  
                 </div>
+				
 				<div class="form-group">
-                  <label class="control-label col-md-3">工程背景</label>
+                  <label class="control-label col-md-3">联系方式</label>
                   <div class="col-md-3 col-xs-11">
-                    <textarea  class="form-control" ></textarea>
-                    
+                    <form:input path="totel" class="form-control" readonly="true"/>
                   </div>
-				  
                 </div>
-				<div class="form-group">
-                  <label class="control-label col-md-3">主持项目</label>
-                  <div class="col-md-3 col-xs-11">
-                    <textarea  class="form-control" ></textarea>
-                    
-                  </div>
-				  
-                </div>
-				<div class="form-group">
-                  <label class="control-label col-md-3">科研论文</label>
-                  <div class="col-md-3 col-xs-11">
-                    <textarea  class="form-control" ></textarea>
-                    
-                  </div>
-				  
-                </div>
-				<div class="form-group">
-                  <label class="control-label col-md-3">专利</label>
-                  <div class="col-md-3 col-xs-11">
-                    <textarea  class="form-control" ></textarea>
-                    
-                  </div>
-				  
-                </div>
-				<div class="form-group">
-                  <label class="control-label col-md-3">软著</label>
-                  <div class="col-md-3 col-xs-11">
-                    <textarea  class="form-control" ></textarea>
-                    
-                  </div>
-				  
-                </div>
-				<div class="form-group">
-                  <label class="control-label col-md-3">专著</label>
-                  <div class="col-md-3 col-xs-11">
-                    <textarea  class="form-control" ></textarea>
-                    
-                  </div>
-				  
-                </div>
-				<div class="form-group">
-                  <label class="control-label col-md-3">教研论文</label>
-                  <div class="col-md-3 col-xs-11">
-                    <textarea  class="form-control" ></textarea>
-                    
-                  </div>
-				  
-                </div>
-				<div class="form-group">
-                  <label class="control-label col-md-3">科研教学获奖</label>
-                  <div class="col-md-3 col-xs-11">
-                    <textarea  class="form-control" ></textarea>
-                    
-                  </div>
-				  
-                </div>
-				<div class="form-group">
-                  <label class="control-label col-md-3">师德师风表彰</label>
-                  <div class="col-md-3 col-xs-11">
-                    <textarea  class="form-control" ></textarea>
-                    
-                  </div>
-				  
-                </div>
-				<div class="form-group">
-                  <label class="control-label col-md-3">与软件学院本科生合作成果</label>
-                  <div class="col-md-3 col-xs-11">
-                    <textarea  class="form-control" ></textarea>
-                    
-                  </div>
-				  
-                </div>
+				
 				<div class="form-group">
                   <div class="col-lg-offset-2 col-lg-10">
                     <button class="btn btn-theme" type="submit">提交</button>
@@ -260,7 +207,7 @@
                 </div>
                
 				
-              </form>
+              </form:form>
             </div>
             <!-- /form-panel -->
           </div>
@@ -352,5 +299,4 @@
   <script src="lib/advanced-form-components.js"></script>
 
 </body>
-
 </html>
