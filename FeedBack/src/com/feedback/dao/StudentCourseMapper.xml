@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.feedback.dao.StudentCourseMapper">
+	<select id="queryByNo" parameterType="java.util.Map"  resultType="StudentCourse">
+		select * from sc_course where sno =#{sno} LIMIT #{startRow}, #{rowCount}
+	</select>
+	<select id="queryMaxCount" resultType="int">
+        SELECT count(*) From sc_course 
+    </select>
+    <select id="queryMaxCountBySno" parameterType="String" resultType="int">
+        SELECT count(*) From sc_course where sno = #{sno}
+    </select>
+</mapper>

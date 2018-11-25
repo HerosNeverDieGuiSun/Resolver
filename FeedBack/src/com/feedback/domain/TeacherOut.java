@@ -1,5 +1,7 @@
 package com.feedback.domain;
 
+import java.util.Date;
+
 public class TeacherOut {
 	public String tono;
 	public String ico;
@@ -15,6 +17,25 @@ public class TeacherOut {
 	public String tolicense;
 	public String topsw;
 	public String totel;
+	
+	public TeacherOut() {}
+	public TeacherOut(String no,String ico,String name,String institution,String type,String profession,String scholar,
+			String year,String school,String tech,String work,String license,String psw,String tel) {
+		this.tono = no ;
+		this.ico = ico;
+		this.toname = name;
+		this.toinstitution = institution;
+		this.totype = type;
+		this.toprofession = profession; 
+		this.toscholar = scholar;
+		this.toyear = year;
+		this.toschool = school;
+		this.totech = tech;
+		this.towork = work;
+		this.tolicense = license;
+		this.topsw = psw;
+		this.totel =tel;
+	}
 	public String getTono() {
 		return tono;
 	}

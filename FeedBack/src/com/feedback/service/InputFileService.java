@@ -301,5 +301,35 @@ public class InputFileService {
 			e.printStackTrace();
 		}
 	
-	}	
+	}
+
+	public void inputAdmInfo(MultipartFile file, String path) {
+		// TODO Auto-generated method stub
+		try {
+			FileInputStream fileInputStream = new FileInputStream(path);
+			BufferedInputStream bufferedInputStream = new BufferedInputStream(fileInputStream);
+			XSSFWorkbook workbook = new XSSFWorkbook(bufferedInputStream);
+			XSSFSheet sheet = workbook.getSheet("Sheet1");
+			int lastRowIndex = sheet.getLastRowNum();
+			int columnNum = sheet.getRow(0).getPhysicalNumberOfCells();
+			Map<String, Object> map = new HashMap<>();
+			
+			for (int i = 1; i <= lastRowIndex; i++) {
+				XSSFRow row = sheet.getRow(i);
+				if (row == null) break;
+			
+				row.getCell(0).setCellType(CellType.STRING);
+				row.getCell(1).setCellType(CellType.STRING);
+				map.put("admno", row.getCell(0).getStringCellValue());
+				map.put("admpsw", row.getCell(1).getStringCellValue());
+				
+				inputFileDao.inputAdmInfo(map);
+			}
+			bufferedInputStream.close();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
 }

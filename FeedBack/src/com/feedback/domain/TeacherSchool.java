@@ -25,6 +25,36 @@ public class TeacherSchool {
 	public String tsarch;
 	public String tspsw;
 	public String tstel;
+	
+	public TeacherSchool() {}
+	public TeacherSchool(String no,String name,String ico,String type,String profession,String department,String scholar,
+			Date birthyear,String school,String sea,String back,String work, int scpaper,int patent,int soft
+			,int sp,int teapaper,String prize,String reward,String arch,String psw,String tel) {
+		
+		this.tsno = no ;
+		this.tsname = name;
+		this.ico = ico;
+		this.tstype = type;
+		this.tsprofession = profession;
+		this.tsdepartment = department;
+		this.tsscholar = scholar;
+		this.birthyear = birthyear;
+		this.tsschool = school;
+		this.tsoversea = sea;
+		this.tsbackground = back;
+		this.tswork = work;
+		this.tsscpaper = scpaper;
+		
+		this.tspatent = patent;
+		this.tssoft = soft;
+		this.tssp = sp;
+		this.tsteapaper = teapaper;
+		this.tsprize = prize;
+		this.tsreward = reward;
+		this.tsarch = arch;
+		this.tspsw = psw;
+		this.tstel = tel;
+	}
 	public String getTsno() {
 		return tsno;
 	}
