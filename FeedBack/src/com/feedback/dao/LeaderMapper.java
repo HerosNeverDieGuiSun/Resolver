@@ -9,4 +9,5 @@ public interface LeaderMapper {
 	public void update(Leader leader);
 	public void insert(Leader leader);
 	public void deleteLeader(String lno);
+	public void updateInfo(Map<String,Object> map);
 }

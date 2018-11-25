@@ -9,4 +9,8 @@
 	<select id="deleteLeader" parameterType="String">
 		DELETE FROM Leader WHERE lno=#{lno}
 	</select>
+	
+	<update id="updateInfo"  parameterType="java.util.Map">
+		UPDATE leader SET lname=#{lname} ,lpsw=#{lpsw} WHERE lno=#{lno};
+	</update>
 </mapper>

@@ -150,6 +150,43 @@ public class InputFileService {
 		}
 	}
 	
+public void inputLeaderInfo(MultipartFile file, String path) {
+		
+		try {
+			System.out.println(path);
+			FileInputStream fileInputStream = new FileInputStream(path);
+			BufferedInputStream bufferedInputStream = new BufferedInputStream(fileInputStream);
+			XSSFWorkbook workbook = new XSSFWorkbook(bufferedInputStream);
+			XSSFSheet sheet = workbook.getSheet("Sheet1");
+			int lastRowIndex = sheet.getLastRowNum();
+			int columnNum = sheet.getRow(0).getPhysicalNumberOfCells();
+			Map<String, Object> map = new HashMap<>();
+			
+			// teacherin
+			for (int i = 1; i <= lastRowIndex; i++) {
+				XSSFRow row = sheet.getRow(i);
+				if (row == null) break;
+				
+				row.getCell(0).setCellType(CellType.STRING);
+				map.put("lno", row.getCell(0).getStringCellValue());
+				row.getCell(1).setCellType(CellType.STRING);
+				map.put("lname", row.getCell(1).getStringCellValue());
+				map.put("lpsw", row.getCell(0).getStringCellValue());
+				System.out.println(map.get("lno"));
+				System.out.println(map.get("lname"));
+				System.out.println(map.get("lpsw"));
+				
+				inputFileDao.inputLeader(map);
+			}
+				
+			
+			bufferedInputStream.close();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
 	public List<TeacherIn> getTeacherIn(TeacherQueryState state) {
 		Map<String, Object> map = new HashMap<>();
 		map.put("startRow", state.getCurPage() * WebUtil.MAX_PAGE_LINES);
@@ -302,12 +339,38 @@ public class InputFileService {
 		}
 	
 
+
 	}
 
 	public void inputAdmInfo(MultipartFile file, String path) {
 		// TODO Auto-generated method stub
+		try {
+			FileInputStream fileInputStream = new FileInputStream(path);
+			BufferedInputStream bufferedInputStream = new BufferedInputStream(fileInputStream);
+			XSSFWorkbook workbook = new XSSFWorkbook(bufferedInputStream);
+			XSSFSheet sheet = workbook.getSheet("Sheet1");
+			int lastRowIndex = sheet.getLastRowNum();
+			int columnNum = sheet.getRow(0).getPhysicalNumberOfCells();
+			Map<String, Object> map = new HashMap<>();
+			
+			for (int i = 1; i <= lastRowIndex; i++) {
+				XSSFRow row = sheet.getRow(i);
+				if (row == null) break;
+			
+				row.getCell(0).setCellType(CellType.STRING);
+				row.getCell(1).setCellType(CellType.STRING);
+				map.put("admno", row.getCell(0).getStringCellValue());
+				map.put("admpsw", row.getCell(1).getStringCellValue());
+				
+				inputFileDao.inputAdmInfo(map);
+			}
+			bufferedInputStream.close();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 
-	}	
 	
 	public void inputClasstimeAddInfo(MultipartFile file, String path) {
 		
@@ -355,6 +418,31 @@ public class InputFileService {
 
 
 	
-	}	
-
+	//修改院内老师信息
+	public void updateTeacherInInfo(Map<String,Object> map){
+		inputFileDao.updateTeacherInInfo(map);
+	}
+	
+	//修改外聘老师信息
+	public void updateTeacherOutInfo(Map<String,Object> map){
+		inputFileDao.updateTeacherOutInfo(map);
+	}
+	
+	//修改校内老师信息
+	public void updateTeacherSchoolInfo(Map<String,Object> map){
+		inputFileDao.updateTeacherSchoolInfo(map);
+	}
+	
+	public void deleteTeacherIn(String tino){
+		inputFileDao.deleteTeacherIn(tino);
+	}
+	
+	public void deleteTeacherSchool(String tsno){
+		inputFileDao.deleteTeacherSchool(tsno);
+	}
+	
+	public void deleteTeacherOut(String tono){
+		inputFileDao.deleteTeacherOut(tono);
+	}
+}
 

@@ -1,7 +1,9 @@
 package com.feedback.controller;
 
 import java.io.File;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.security.auth.message.callback.PrivateKeyCallback.Request;
@@ -151,6 +153,7 @@ public String ClasstimeAddInfoInput(MultipartFile file, Model model, HttpServlet
 		return "redirect:/GetTeacherInServlet";
 	}
 	
+
 	@RequestMapping(value="/teacher/GetTeacherOutServlet")
 	public String getTeacherOut(Model model,HttpSession session) {
 		
@@ -160,6 +163,40 @@ public String ClasstimeAddInfoInput(MultipartFile file, Model model, HttpServlet
 		session.setAttribute("teacherout", t);
 		return "teacher/TeacherOutInfo";
 	}
+
+	@RequestMapping(value="/superAdm/LeaderInfoInputServlet", method=RequestMethod.POST)
+	public String LeaderInfoInput(MultipartFile file, Model model, HttpServletRequest request) {
+		String UPLOAD_PATH = "uploadFiles/";
+		if (file == null) return "redirect:/GetTeacherInServlet";
+		if (file.getOriginalFilename().equals("")) return "redirect:/GetTeacherInServlet";
+		
+		//设置上传文件的保存目录
+		String path = request.getServletContext().getRealPath(".");
+		path += "/" + UPLOAD_PATH;
+		File newfile = new File(path);
+		if (!newfile.exists()) {
+			newfile.mkdirs();
+		}
+		
+		// 修改文件名
+		String filename = file.getOriginalFilename();
+		String newname = System.currentTimeMillis() + "-" + filename;
+		
+		try {
+			//保存到path下的名字为newname的文件
+			file.transferTo(new File(path, newname));
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		System.out.println("in");
+		inputFileService.inputLeaderInfo(file, path + newname);
+		
+		return "redirect://LeaderCtrl/ListLeader";
+	}
+	
+
 	@RequestMapping(value="/GetTeacherInServlet")
 	public String getAllTeacher(Model model, HttpSession session) {
 		session.removeAttribute("TeacherInState");
@@ -352,5 +389,64 @@ public String ClasstimeAddInfoInput(MultipartFile file, Model model, HttpServlet
 		session.setAttribute("TeacherInState", teacherInState);
 		session.setAttribute("TeacherSchoolState", teacherSchoolState);
 		return "superAdm/ManangeTeacher";
+	}
+	
+	@RequestMapping(value="/InputFileController/updateTeacherInInfo",method=RequestMethod.POST)
+	public String updateTeacherInInfo(Model model, HttpSession session,HttpServletRequest request){
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("tino", (String) request.getParameter("teacherNumber"));
+		map.put("tiname", (String)request.getParameter("teacherName"));
+		map.put("tiprofession",(String) request.getParameter("teacherProfession"));
+		map.put("title",(String)request.getParameter("teacherTelephone"));
+		
+		inputFileService.updateTeacherInInfo(map);
+		return "redirect:/GetTeacherInServlet";
+	}
+	
+	@RequestMapping(value="/InputFileController/updateTeacherOutInfo",method=RequestMethod.POST)
+	public String updateStudentOutInfo(Model model, HttpSession session,HttpServletRequest request){
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("tono", (String) request.getParameter("teacherNumber"));
+		map.put("toname", (String)request.getParameter("teacherName"));
+		map.put("toprofession",(String) request.getParameter("teacherProfession"));
+		map.put("totel",(String)request.getParameter("teacherTelephone"));
+		
+		inputFileService.updateTeacherOutInfo(map);
+		return "redirect:/GetTeacherInServlet";
+	}
+	
+	@RequestMapping(value="/InputFileController/updateTeacherSchoolInfo",method=RequestMethod.POST)
+	public String updateStudentSchoolInfo(Model model, HttpSession session,HttpServletRequest request){
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("tsno", (String) request.getParameter("teacherNumber"));
+		map.put("tsname", (String)request.getParameter("teacherName"));
+		map.put("tsprofession",(String) request.getParameter("teacherProfession"));
+		map.put("tstel",(String)request.getParameter("teacherTelephone"));
+		inputFileService.updateTeacherSchoolInfo(map);
+		return "redirect:/GetTeacherInServlet";
+	}
+	
+	@RequestMapping(value="/InputFileController/deleteTeacherIn",method=RequestMethod.GET)
+	public String deleteTeacherIn(Model model, HttpSession session,HttpServletRequest request){
+		String tino = (String) request.getParameter("tino");
+
+		inputFileService.deleteTeacherIn(tino);
+		return "redirect:/GetTeacherInServlet";
+	}
+	
+	@RequestMapping(value="/InputFileController/deleteTeacherSchool",method=RequestMethod.GET)
+	public String deleteTeacherSchool(Model model, HttpSession session,HttpServletRequest request){
+		String tsno = (String) request.getParameter("tsno");
+
+		inputFileService.deleteTeacherSchool(tsno);
+		return "redirect:/GetTeacherInServlet";
+	}
+	
+	@RequestMapping(value="/InputFileController/deleteTeacherOut",method=RequestMethod.GET)
+	public String deleteTeacherOut(Model model, HttpSession session,HttpServletRequest request){
+		String tono = (String) request.getParameter("tono");
+
+		inputFileService.deleteTeacherOut(tono);
+		return "redirect:/GetTeacherInServlet";
 	}
 }

@@ -48,4 +48,15 @@ public class LeaderController {
 		leaderServ.deleteLeader(lno);
 		return "redirect:../LeaderCtrl/ListLeader";
 	}
+	
+	@RequestMapping(value="/UpdateLeaderInfo")
+	public String updateLeaderInfo(Model model, HttpSession session,HttpServletRequest request){
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("lno", (String) request.getParameter("leaderNumber"));
+		map.put("lname", (String)request.getParameter("leaderName"));
+		map.put("lpsw",(String) request.getParameter("leaderPassword"));
+		
+		leaderServ.updateLeaderInfo(map);
+		return "redirect:../LeaderCtrl/ListLeader";
+	}
 }
