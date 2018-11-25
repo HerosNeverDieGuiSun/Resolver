@@ -24,6 +24,33 @@ public class TeacherIn {
 	public String tiprize;
 	public String tireward;
 	public String tiarch;
+	
+	public TeacherIn() {}
+	public TeacherIn(String no,String psw,String name,String ico,String title,String profession,String scholar,
+			String come,Date birthyear,String school,String sea,String back,String work, int scpaper,int teapaper,int patent,int soft
+			,int sp,String prize,String reward,String arch) {
+		this.tino = no ;
+		this.tipsw = psw;
+		this.tiname = name;
+		this.ico = ico;
+		this.title = title;
+		this.tiprofession = profession;
+		this.tischolar = scholar;
+		this.ticome =come;
+		this.birthyear = birthyear;
+		this.tischool = school;
+		this.tioversea = sea;
+		this.tibackground = back;
+		this.tiwork = work;
+		this.tiscpaper = scpaper;
+		this.titeapaper = teapaper;
+		this.tipatent = patent;
+		this.tisoft = soft;
+		this.tisp = sp;
+		this.tiprize = prize;
+		this.tireward = reward;
+		this.tiarch = arch;
+	}
 	public String getTino() {
 		return tino;
 	}

@@ -1,14 +1,12 @@
-<%@ page language="java" import="com.feedback.domain.*" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ page import="java.util.*" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page language="java" import="java.util.*,com.feedback.domain.*" pageEncoding="utf-8"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<%@ page import="com.feedback.domain.Administrators" %>
-<%@ page import="java.sql.*" %>
+ <%@page deferredSyntaxAllowedAsLiteral="true"%>
 <%
 	String path = request.getContextPath();
 %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html lang="en" dir="ltr" >
+<jsp:directive.page import="java.util.List"/>
+<!DOCTYPE html>
 
 <head>
   <meta charset="utf-8">
@@ -16,24 +14,24 @@
   <meta name="description" content="">
   <meta name="author" content="Dashboard">
   <meta name="keyword" content="Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
-  <title>超级管理员端</title>
+  <title>管理员端</title>
 
   <!-- Favicons -->
-  <link href="<%=path%>/superAdm/img/favicon.png" rel="icon">
-  <link href="<%=path%>/superAdm/img/apple-touch-icon.png" rel="apple-touch-icon">
+  <link href="<%=path%>/admin/img/favicon.png" rel="icon">
+  <link href="<%=path%>/admin/img/apple-touch-icon.png" rel="apple-touch-icon">
 
   <!-- Bootstrap core CSS -->
-  <link href="<%=path%>/superAdm/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="<%=path%>/admin/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <!--external css-->
-  <link href="<%=path%>/superAdm/lib/font-awesome/css/font-awesome.css" rel="stylesheet" />
-  <link rel="stylesheet" type="text/css" href="<%=path%>/superAdm/lib/bootstrap-fileupload/bootstrap-fileupload.css" />
-  <link rel="stylesheet" type="text/css" href="<%=path%>/superAdm/lib/bootstrap-datepicker/css/datepicker.css" />
-  <link rel="stylesheet" type="text/css" href="<%=path%>/superAdm/lib/bootstrap-daterangepicker/daterangepicker.css" />
-  <link rel="stylesheet" type="text/css" href="<%=path%>/superAdm/lib/bootstrap-timepicker/compiled/timepicker.css" />
-  <link rel="stylesheet" type="text/css" href="<%=path%>/superAdm/lib/bootstrap-datetimepicker/datertimepicker.css" />
+  <link href="<%=path%>/admin/lib/font-awesome/css/font-awesome.css" rel="stylesheet" />
+  <link rel="stylesheet" type="text/css" href="<%=path%>/admin/lib/bootstrap-fileupload/bootstrap-fileupload.css" />
+  <link rel="stylesheet" type="text/css" href="<%=path%>/admin/lib/bootstrap-datepicker/css/datepicker.css" />
+  <link rel="stylesheet" type="text/css" href="<%=path%>/admin/lib/bootstrap-daterangepicker/daterangepicker.css" />
+  <link rel="stylesheet" type="text/css" href="<%=path%>/admin/lib/bootstrap-timepicker/compiled/timepicker.css" />
+  <link rel="stylesheet" type="text/css" href="<%=path%>/admin/lib/bootstrap-datetimepicker/datertimepicker.css" />
   <!-- Custom styles for this template -->
-  <link href="<%=path%>/superAdm/css/style.css" rel="stylesheet">
-  <link href="<%=path%>/superAdm/css/style-responsive.css" rel="stylesheet">
+  <link href="<%=path%>/admin/css/style.css" rel="stylesheet">
+  <link href="<%=path%>/admin/css/style-responsive.css" rel="stylesheet">
 
   <!-- =======================================================
     Template Name: Dashio
@@ -47,7 +45,9 @@
 	}
   </style>
   <script type="text/javascript">
-		
+		function loadFile2(file){
+		  $("#filename2").html(file.name);
+	}
 	//触发模态框的同时调用此方法
 	function editInfo(obj) {
 		
@@ -61,13 +61,23 @@
 		var name = document.getElementById("table").rows[id].cells[2].innerText;
 		var sex = document.getElementById("table").rows[id].cells[3].innerText;*/
 		
-		var admNumber = tr.cells[0].innerText;
-		var admPassword = tr.cells[1].innerText;
+		var ctno = tr.cells[0].innerText;
+		var add = tr.cells[1].innerText;
+		var startweek = tr.cells[2].innerText;
+		var endweek = tr.cells[3].innerText;
+		var day = tr.cells[4].innerText;
+		var startsection = tr.cells[5].innerText;
+		var endsection = tr.cells[6].innerText;
 		//window.alert(tr.cells[0]).innerText;
 		//向模态框中传值
 		
-		$('#adm_number').val(admNumber);
-		$('#adm_password').val(admPassword);
+		$('#ct_no').val(ctno);
+		$('#address').val(add);
+		$('#start_week').val(startweek);
+		$('#end_week').val(endweek);
+		$('#day_').val(day);
+		$('#start_section').val(startsection);
+		$('#end_section').val(endsection);
 		$('#exampleModal').modal('show');
 		
 	}
@@ -77,17 +87,6 @@
 		});
 	}
   </script>
-  <script type="text/javascript">
-	function loadFile(file){
-	   $("#filename").html(file.name);
-	}
-	function loadFile1(file){
-		$("#filename1").html(file.name);
-	}
-	function loadFile2(file){
-		  $("#filename2").html(file.name);
-	}
-	</script>
 </head>
 
 <body>
@@ -101,7 +100,7 @@
         <div class="fa fa-bars tooltips" data-placement="right"></div>
       </div>
       <!--logo start-->
-      <a href="index.html" class="logo"><b>超级管理员端</b></a>
+      <a href="index.html" class="logo"><b>管理员端</b></a>
       <!--logo end-->
       
       <div class="top-menu">
@@ -110,38 +109,36 @@
         </ul>
       </div>
     </header>
-	<aside>
+    <!--header end-->
+    <!-- **********************************************************************************************************************************************************
+        MAIN SIDEBAR MENU
+        *********************************************************************************************************************************************************** -->
+    <!--sidebar start-->
+    <aside>
       <div id="sidebar" class="nav-collapse ">
         <!-- sidebar menu start-->
         <ul class="sidebar-menu" id="nav-accordion">
-          <p class="centered"><a href="profile.html"><img src="<%=path%>/superAdm/img/wuyanzu.jpg" class="img-circle" width="80"></a></p>
+          <p class="centered"><a href="profile.html"><img src="img/wuyanzu.jpg" class="img-circle" width="80"></a></p>
           <h5 class="centered">小红</h5>
           
+         <li class="mt">
+            <a  href="./allfeedbackctrl">
+              <i class="fa fa-dashboard"></i>
+              <span>查看反馈</span>
+              </a>
+          </li>
+		  <li class="mt">
+            <a  href="AuditInfo.html">
+              <i class="fa fa-envelope"></i>
+              <span>审核教师信息</span>
+              </a>
+          </li>
           <li class="mt">
-            <a  href="TeacherInInfo.html">
-              <i class="fa fa-dashboard"></i>
-              <span>教师信息</span>
+            <a  class="active" href="../ClasstimeAddManageController/listAllClasstimeAddByPage">
+              <i class="fa fa-envelope"></i>
+              <span>管理课表信息</span>
               </a>
           </li>
-		  <li class="mt">
-            <a  href="TeacherInInfo.html">
-              <i class="fa fa-dashboard"></i>
-              <span>学生信息</span>
-              </a>
-          </li>
-		  <li class="mt">
-            <a  href="TeacherInInfo.html">
-              <i class="fa fa-dashboard"></i>
-              <span>领导信息</span>
-              </a>
-          </li>
-		  <li class="mt">
-            <a class="active" href="TeacherInInfo.html">
-              <i class="fa fa-dashboard"></i>
-              <span>管理员信息</span>
-              </a>
-          </li>
-		  
 		  
 		  
           
@@ -150,32 +147,27 @@
         <!-- sidebar menu end-->
       </div>
     </aside>
+    <!--sidebar end-->
+    
     <!--header end-->
     <!-- **********************************************************************************************************************************************************
         MAIN SIDEBAR MENU
         *********************************************************************************************************************************************************** -->
     <!--sidebar start-->
-   <section id="main-content">
+    <section id="main-content">
       <section class="wrapper">
-        
         <div class="row">
-          
-          
         </div>
         <!-- row -->
         <div class="row mt">
-			
           <div class="col-md-12">
-		  
             <div class="content-panel">
               <table class="table table-striped table-advance table-hover">
-				
-                <h4><i class="fa fa-angle-right"></i>管理员信息
-				</h4>
+                <h4><i class="fa fa-angle-right"></i>学生信息</h4>
                 <hr>
                 <div class="row mt">
                 	<div>
-	                <form action="../AdmManageController/listAllAdmByPage">
+	                <form action="../ClasstimeAddManageController/listAllClasstimeAddByPage">
 					  	<div class="col-md-2">
 					    	<input type="text" class="form-control" id="searchByName" name="classQuery">
 					  	</div>
@@ -187,58 +179,62 @@
 					</div>
 					
 				</div>
-                
                 <thead>
                   <tr>
-                    
-                    <th class="hidden-phone"><i class="fa fa-question-circle"></i> 管理员工号</th>
-                    <th><i class="fa fa-bookmark"></i> 管理员密码</th>
-                    <th><i class=" fa fa-edit"></i>操作 </th>
-                    <th></th>
+                    <th><i class="fa fa-bullhorn"></i> 课程编号</th>
+                    <th class="hidden-phone"><i class="fa fa-question-circle"></i>上课地点</th>
+                    <th><i class="fa fa-bookmark"></i> 起始周</th>
+                    <th><i class="fa fa-edit"></i>结束周</th>
+                    <th><i class="fa fa-edit"></i>星期几</th>
+                    <th><i class="fa fa-edit"></i>起始节</th>
+                    <th><i class="fa fa-edit"></i>结束节</th>
                   </tr>
                 </thead>
                 <tbody>
-                <c:forEach var="l" items="${ requestScope.admList }">
+                	
+                  <c:forEach var="classtimeAdd" items="${requestScope.classtimeAddList}">
                   <tr>
-                    <td><a href="basic_table.html#">${l.admno}</a></td>
-                    <td class="hidden-phone">${l.admpsw } </td>
-                    
-                    <td>
-                      <button class="btn btn-primary btn-xs" onclick="editInfo(this);" class="btn btn-info btn-xs" data-placement="top" title="修改"><i class="fa fa-pencil"></i></button>
-                      <a href="../AdmManageController/deleteAdm?admno=${l.admno}&page=${manageAdmQueryState.curPage}"><button class="btn btn-danger btn-xs" class="btn btn-info btn-xs" data-toggle="tooltip" data-placement="top" title="删除"><i class="fa fa-trash-o "></i></button></a>
-                      
+                    <td><a href="basic_table.html#">${classtimeAdd.ctno }</a></td>
+                    <td class="hidden-phone">${classtimeAdd.add}</td>
+                    <td class="hidden-phone">${classtimeAdd.startweek}</td>
+                    <td class="hidden-phone">${classtimeAdd.endweek}</td>
+                    <td class="hidden-phone">${classtimeAdd.day}</td>
+                    <td class="hidden-phone">${classtimeAdd.startsection}</td>
+                    <td class="hidden-phone">${classtimeAdd.endsection}</td>
+                    <td class="hidden-phone">
+                      <button type="button" class="btn btn-primary btn-xs" onclick="editInfo(this);" class="btn btn-info btn-xs" data-placement="top" title="修改"><i class="fa fa-pencil"></i></button>
+                      <a href="../ClasstimeAddManageController/deleteClasstimeAdd?ctno=${classtimeAdd.ctno}&add=${classtimeAdd.add}&startweek=${classtimeAdd.startweek}&endweek=${classtimeAdd.endweek}&day=${classtimeAdd.day}&page=${QueryState.curPage}">
+                      <button class="btn btn-danger btn-xs" class="btn btn-info btn-xs" data-toggle="tooltip" data-placement="top" title="删除"><i class="fa fa-trash-o " ></i></button></a>
                     </td>
                   </tr>
-				 </c:forEach>
-				  
-	           </tbody>
-				
+				  </c:forEach>
+                </tbody>
               </table>
-			  <div class="col-md-12">
+              <div class="col-md-12">
                 <center>
                 <nav aria-label="Page navigation">
                   <ul class="pagination">
                   <li>
-                    <a href="../AdmManageController/listAllAdmByPage?page=prev" aria-label="Previous">
+                    <a href="../ClasstimeAddManageController/listAllClasstimeAddByPage?page=prev" aria-label="Previous">
                     <span aria-hidden="true">&laquo;</span>
                     </a>
                   </li>
                   <c:choose>
-	                  <c:when test="${manageAdmQueryState.lastPage<6}">
-		                  <c:forEach begin = "0" end = "${manageAdmQueryState.lastPage}"  step = "1" varStatus="pageIndex">
-		                  	  <li><a href="../AdmManageController/listAllAdmByPage?page=${pageIndex.index}">${pageIndex.index+1}</a></li>
+	                  <c:when test="${QueryState.lastPage<6}">
+		                  <c:forEach begin = "0" end = "${QueryState.lastPage}"  step = "1" varStatus="pageIndex">
+		                  	  <li><a href="../ClasstimeAddManageController/listAllClasstimeAddByPage?page=${pageIndex.index}">${pageIndex.index+1}</a></li>
 		                  </c:forEach>
 	                  </c:when>
                   	  <c:otherwise>
-                  		  <li><a href="../AdmManageController/listAllAdmByPage?page=0">1</a></li>
+                  		  <li><a href="../ClasstimeAddManageController/listAllClasstimeAddByPage?page=0">1</a></li>
 		                  <li><a href="#">...</a></li>
-		                  <li><a href="#">${manageAdmQueryState.curPage+1}</a></li>
+		                  <li><a href="#">${QueryState.curPage+1}</a></li>
 		                  <li><a href="#">...</a></li>
-                  		  <li><a href=".../AdmManageController/listAllAdmByPage?page=${manageAdmQueryState.lastPage}">${manageAdmQueryState.lastPage+1}</a></li>
+                  		  <li><a href=".../ClasstimeAddManageController/listAllClasstimeAddByPage?page=${QueryState.lastPage}">${QueryState.lastPage+1}</a></li>
                   	  </c:otherwise>
                   </c:choose>
                   <li>
-                    <a href="../AdmManageController/listAllAdmByPage?page=next" aria-label="Next">
+                    <a href="../ClasstimeAddManageController/listAllClasstimeAddByPage?page=next" aria-label="Next">
                     <span aria-hidden="true">&raquo;</span>
                     </a>
                   </li>
@@ -247,24 +243,48 @@
               </center>
               </div>
             </div>
-            <!-- 模态弹出窗 -->
+            <!-- /content-panel -->
+          </div>
+          <!-- /col-md-12 -->
+        </div>
+        <!-- 模态弹出窗 -->
 		<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
 		  <div class="modal-dialog" role="document">
 			<div class="modal-content">
 			  <!-- 标题栏 -->
 			  <div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-				<h4 class="modal-title" id="exampleModalLabel">管理员信息</h4>
+				<h4 class="modal-title" id="exampleModalLabel">课程信息</h4>
 			  </div>
-			  <form method="POST" action="../AdmManageController/updateAdmInfo?page=${manageAdmQueryState.curPage}">
+			  <form method="POST" action="../ClasstimeAddManageController/updateClasstimeAdd?page=${QueryState.curPage}">
 			  <div class="modal-body">
 				  <div class="form-group">
-					<label for="message-text" class="control-label">登录名:</label>
-					<input type="text" class="form-control" id="adm_number" name="admNumber" readonly="readonly">
+					<label for="recipient-name" class="control-label">课程编号:</label>
+					<input type="text" class="form-control" id="ct_no" name="ctno" readonly="readonly">
 				  </div>
 				  <div class="form-group">
-					<label for="recipient-name" class="control-label">密码:</label>
-					<input type="text" class="form-control" id="adm_password" name="admPassword">
+					<label for="message-text" class="control-label">地址:</label>
+					<input type="text" class="form-control" id="address" name="add" >
+				  </div>
+				  <div class="form-group">
+					<label for="recipient-name" class="control-label">起始周</label>
+					<input type="text" class="form-control" id="start_week" name="startweek">
+				  </div>
+				  <div class="form-group">
+					<label for="recipient-name" class="control-label">结束周:</label>
+					<input type="text" class="form-control" id="end_week" name="endweek">
+				  </div>
+				  <div class="form-group">
+					<label for="message-text" class="control-label">星期几:</label>
+					<input type="text" class="form-control" id="day_" name="day" >
+				  </div>
+				  <div class="form-group">
+					<label for="recipient-name" class="control-label">起始节:</label>
+					<input type="text" class="form-control" id="start_section" name="startsection">
+				  </div>
+				  <div class="form-group">
+					<label for="recipient-name" class="control-label">结束节:</label>
+					<input type="text" class="form-control" id="end_section" name="endsection">
 				  </div>
 				
 			  </div>
@@ -276,24 +296,18 @@
 			</div>
 		  </div>
 		</div>
-			<div>
-					<form:form method="post" action="../superAdm/AdmInfoInputServlet" enctype="multipart/form-data">
+		<div>
+					<form:form method="post" action="../admin/ClasstimeAddInfoInputServlet" enctype="multipart/form-data">
 						<div class="file-container" style="display:inline-block;position:relative;overflow: hidden;vertical-align:middle">
 					        &nbsp;&nbsp;<button class="btn btn-info" type="button">上传文件</button>
 					        <input type="file" name="file" id="jobData" onchange="loadFile2(this.files[0])" style="position:absolute;top:0;left:0;font-size:34px; opacity:0">
 					    </div>
 	    				&nbsp;&nbsp;<span id="filename2" style="vertical-align: middle">未上传文件</span>
-	    				&nbsp;&nbsp;<button type="submit" class="btn btn-info">导入管理员信息</button>			
+	    				&nbsp;&nbsp;<button type="submit" class="btn btn-info">导入课表</button>			
 					</form:form>
 				</div>
-            <!-- /content-panel -->
-			
-          </div>
-          <!-- /col-md-12 -->
-		  
-        </div>
-		
-        <!-- /row -->
+
+        
       </section>
     </section>
 	</section>

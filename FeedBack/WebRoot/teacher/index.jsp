@@ -23,6 +23,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </head>
   
   <body>
+
     <li><a href="./ScheduleCtrl/ListScheduleInfo">课表展示</a></li>
+
+   <li><a href="./teacher/GetTeacherOutServlet">校外教师</a></li>
+
   </body>
 </html>

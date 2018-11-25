@@ -2,6 +2,16 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.feedback.dao.AdministratorsMapper">
+	
+    <select id="showAdmInfo" resultType="Administrators" parameterType="String">
+		select * from adm where admno=#{admno}
+	</select>
+	
+	<select id="updateAdmInfo"  parameterType="Administrators">
+		
+		UPDATE  adm SET admpsw=#{admpsw} WHERE admno=#{admno};
+	</select>
+	
 	<select id="queryAll" resultType="Administrators">
 		select * from adm
 	</select>
@@ -9,4 +19,38 @@
 	<select id="deleteAdm" parameterType="String">
 		DELETE FROM adm WHERE admno=#{admno}
 	</select>
+	
+	<delete id="deleteAdmByAdmno" parameterType="string">
+		DELETE FROM adm WHERE admno = #{admno}
+	</delete>
+	
+	<select id="queryManageAdmMaxPageCount" resultType="int" parameterType="java.util.Map">
+        SELECT COUNT(admno) FROM adm 
+        <where>
+        	<if test = "admno!=null and admno!=''"> 
+                and adm like CONCAT('%',#{adm},'%')
+            </if>
+            <if test="admpsw != null and admpsw != ''"> 
+                and admpsw = #{admpsw}
+            </if> 
+        </where>
+    </select>
+    
+    <select id="queryByPage" parameterType="java.util.Map" resultType="Administrators">
+        SELECT * FROM adm
+        <where>
+        	<if test = "admno!=null and admno!=''"> 
+                and admno like CONCAT('%',#{admno},'%')
+            </if>
+            <if test="admpsw != null and admpsw != ''"> 
+                and admpsw = #{admpsw}
+            </if> 
+        </where>
+        LIMIT #{startRow}, #{rowCount}
+    </select>
+    
+    <update id="updateAdm" parameterType="java.util.Map">
+    	update adm set admpsw = #{admpsw} where admno = #{admno}
+    </update>
+    
 </mapper>

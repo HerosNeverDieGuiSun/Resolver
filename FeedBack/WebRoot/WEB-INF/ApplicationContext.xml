@@ -70,9 +70,28 @@
         <property name="sqlSessionFactory" ref="sqlSessionFactory" />
     </bean>
 
-    
     <bean id="loginMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
         <property name="mapperInterface" value="com.feedback.dao.LoginMapper" />
+        <property name="sqlSessionFactory" ref="sqlSessionFactory" />
+    </bean>
+    
+
+
+    <bean id="feedbackMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+        <property name="mapperInterface" 
+            value="com.feedback.dao.FeedbackMapper" />
+        <property name="sqlSessionFactory" ref="sqlSessionFactory" />
+    </bean>
+    
+    <bean id="studentCourseMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+        <property name="mapperInterface" 
+            value="com.feedback.dao.StudentCourseMapper" />
+        <property name="sqlSessionFactory" ref="sqlSessionFactory" />
+    </bean>
+
+
+     <bean id="classtimeAddMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+        <property name="mapperInterface" value="com.feedback.dao.ClasstimeAddMapper" />
         <property name="sqlSessionFactory" ref="sqlSessionFactory" />
     </bean>
     

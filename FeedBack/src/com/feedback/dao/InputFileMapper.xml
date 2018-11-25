@@ -33,6 +33,10 @@
         	#{ico}, #{status})
 	</insert>
 	
+	<insert id="inputAdmInfo" parameterType="java.util.Map" useGeneratedKeys="true" keyProperty="admno">
+        insert into adm (admno, admpsw) values (#{admno}, #{admpsw})
+	</insert>
+	
 	<select id="getTeacherIn" parameterType="java.util.Map" resultType="TeacherIn">
 		select * from teacherin limit #{startRow}, #{rowCount}
 	</select>
@@ -56,4 +60,7 @@
 	<select id="queryTSMaxCount" resultType="int">
 		select count(tsno) from teacherschool
 	</select>
+	<insert id="inputClasstimeAddInfo" parameterType="java.util.Map" useGeneratedKeys="true" keyProperty="ClasstimeAdd">
+        insert into classtimeadd (ctno,`add`,startweek,endweek,day,startsection,endsection) values (#{ctno}, #{add}, #{startweek}, #{endweek},#{day},#{startsection}, #{endsection})
+	</insert>
 </mapper>
