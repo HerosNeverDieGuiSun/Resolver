@@ -7,10 +7,7 @@
 		maxIdle="30"
 		maxWait="5000" 
 		username="root"
-		password="zheng85673062"
+		password="19980218hzh"
 		dirverClassName="com.mysql.cj.jdbc.Driver"
 		url="jdbc:mysql://localhost:3306/feedback_2?serverTimezone=Hongkong&amp;useSSL=false"/>
-		
-		
-		
 </Context>

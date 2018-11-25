@@ -33,6 +33,10 @@
         	#{ico}, #{status})
 	</insert>
 	
+	<insert id="inputLeader" parameterType="java.util.Map" useGeneratedKeys="true" keyProperty="lno">
+        insert into leader (lno, lname, lpsw) values (#{lno}, #{lname}, #{lpsw})
+	</insert>
+	
 	<select id="getTeacherIn" parameterType="java.util.Map" resultType="TeacherIn">
 		select * from teacherin limit #{startRow}, #{rowCount}
 	</select>
@@ -56,4 +60,28 @@
 	<select id="queryTSMaxCount" resultType="int">
 		select count(tsno) from teacherschool
 	</select>
+	
+	<update id="updateTeacherInInfo" parameterType="java.util.Map">
+		update teacherin set tiname=#{tiname},tiprofession = #{tiprofession},title=#{title} where tino=#{tino}<!-- title应为titel，数据库字段写错了 -->
+	</update>
+	
+	<update id="updateTeacherOutInfo" parameterType="java.util.Map">
+		update teacherout set toname=#{toname},toprofession = #{toprofession},totel=#{totel} where tono=#{tono}
+	</update>
+	
+	<update id="updateTeacherSchoolInfo" parameterType="java.util.Map">
+		update teacherschool set tsname=#{tsname},tsprofession = #{tsprofession},tstel=#{tstel} where tsno = #{tsno}
+	</update>
+	
+	<delete id="deleteTeacherIn" parameterType="string">
+		delete from teacherin where tino=#{tino}
+	</delete>
+	
+	<delete id="deleteTeacherSchool" parameterType="string">
+		delete from teacherschool where tsno=#{tsno}
+	</delete>
+	
+	<delete id="deleteTeacherOut" parameterType="string">
+		delete from teacherout where tono=#{tono}
+	</delete>
 </mapper>

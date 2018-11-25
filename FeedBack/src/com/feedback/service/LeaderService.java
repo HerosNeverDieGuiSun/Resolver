@@ -21,15 +21,16 @@ public class LeaderService {
 	
 	public List<Leader> getLeaderList(){
 		List<Leader> list = leaderDAO.queryAll();
-		System.out.println(list.toString());
 		return list;
 	}
 	
 	public void deleteLeader(String lno){
 		Map<String,Object> map= new HashMap<String,Object>();
 		map.put("lno", lno);
-		System.out.println("ssdasda");
-		System.out.println(lno+"ssss");
 		leaderDAO.deleteLeader(lno);
+	}
+	
+	public void updateLeaderInfo(Map<String,Object> map){
+		leaderDAO.updateInfo(map);
 	}
 }

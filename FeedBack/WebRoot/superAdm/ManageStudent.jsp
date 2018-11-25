@@ -79,7 +79,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	}
   </script>
 </head>
-
 <body>
   <section id="container">
     <!-- **********************************************************************************************************************************************************
@@ -93,7 +92,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       <!--logo start-->
       <a href="index.html" class="logo"><b>管理员端</b></a>
       <!--logo end-->
-      
       <div class="top-menu">
         <ul class="nav pull-right top-menu">
           <li><a class="logout" href="login.html">退出</a></li>
@@ -136,7 +134,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         <!-- sidebar menu end-->
       </div>
     </aside>
-    
     <!--header end-->
     <!-- **********************************************************************************************************************************************************
         MAIN SIDEBAR MENU
