@@ -4,6 +4,7 @@ import java.io.File;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.security.auth.message.callback.PrivateKeyCallback.Request;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -116,6 +117,15 @@ public class InputFileController {
 		return "redirect:/GetTeacherInServlet";
 	}
 	
+	@RequestMapping(value="/teacher/GetTeacherOutServlet")
+	public String getTeacherOut(Model model,HttpSession session) {
+		
+		TeacherOut t = new TeacherOut("2016215001","1","Ðì±¾Öù","2","ÔºÄÚ","555","5","56"
+				,"5565","665","555","2016215201","555","222");
+		model.addAttribute("teacherout", t);
+		session.setAttribute("teacherout", t);
+		return "teacher/TeacherOutInfo";
+	}
 	@RequestMapping(value="/GetTeacherInServlet")
 	public String getAllTeacher(Model model, HttpSession session) {
 		session.removeAttribute("TeacherInState");

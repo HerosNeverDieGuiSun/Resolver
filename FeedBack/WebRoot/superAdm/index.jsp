@@ -25,6 +25,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <body>
    <li><a href="./AdmManageController/listAllAdmByPage">领导管理</a></li>
    <li><a href="./AdmManageController/listAllAdmByPage">管理员管理</a></li>
+   <li><a href="./GetTeacherInServlet">教师管理</a></li>
    <a href="./StudentManageController/listAllStudentByPage">go to supAdmin page</a>
   </body>
 </html>
