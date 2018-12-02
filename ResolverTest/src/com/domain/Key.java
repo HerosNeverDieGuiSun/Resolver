@@ -47,6 +47,16 @@ public class Key{
 				return tag.COMMA;
 			case ')':
 				return tag.COMMA;
+			case '∃':
+				return tag.EXIST;
+			case '∀':
+				return tag.ALL;
+			case '·':
+				return tag.DOT;
+			case '∪':
+				return tag.UNION;
+			case '∩':
+				return tag.INTERSECTION;
 			default:
 				return tag.ERR;
 		}

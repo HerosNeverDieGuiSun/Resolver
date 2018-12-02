@@ -18,5 +18,8 @@ public enum Tag{
 	DOM,RAN,		//定义域，值域
 	COMMA,		//逗号
 	LBRACKET,RBRACKET,	//表示()
-	DOUBLEEQUALITY		//表示==
+	DOUBLEEQUALITY,		//表示==
+	DOT,					//圆点·
+	EXIST,ALL,				//∃   ∀
+	UNION,INTERSECTION      // ∪    ∩
 }
