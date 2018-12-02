@@ -59,6 +59,13 @@ public class Key{
 				return tag.UNION;
 			case '∩':
 				return tag.INTERSECTION;
+			case'∅':
+				return tag.EMPTY;
+			case'⊆':
+				return tag.SUBSET;
+			
+			case'!':
+				return tag.EXCLAMATORY;
 			default:
 				return tag.ERR;
 		}
