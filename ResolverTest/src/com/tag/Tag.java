@@ -24,5 +24,8 @@ public enum Tag{
 	UNION,INTERSECTION,      // ∪    ∩
 	FINITE,					// F
 	SEQ,					//seq
-	BAG						//bag	
+	BAG,						//bag	
+	EMPTY,				// 空集
+	SUBSET,NOTSUBSET,		// 子集 , 不是子集
+	EXCLAMATORY		// 感叹号
 }
