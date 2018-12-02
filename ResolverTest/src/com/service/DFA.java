@@ -204,6 +204,7 @@ public class DFA {
 		if(index==list.size()){
 			return null;
 		}else{
+			index=index+1;
 			return token=list.get(index);
 		}
 		
