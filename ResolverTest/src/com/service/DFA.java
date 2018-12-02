@@ -13,14 +13,17 @@ public class DFA {
 	
 	Tag tag ;
 	Tag tag1;
+	List<Token> list = new ArrayList<Token>();
+	int index=0;
 	void change(){
 		Key key  =new Key();
 		
 		System.out.println(key.getTag('='));
 	}
 	
-	public List<Token> Scan(String str){
+	public void Scan(String str){
 		String name ="";
+		list.clear();
 		List<Token> list = new ArrayList<Token>();
 		for(int i =0 ;i<str.length();i++){
 			//字符串逐个扫描,并加入ch中,并判断
@@ -193,18 +196,31 @@ public class DFA {
 			System.out.println("tag="+tag);
 			name="";
 		}
-		return list;
+		//return list;
+	}
+	
+	public Token getToken(){
+		Token token =new Token();
+		if(index==list.size()){
+			return null;
+		}else{
+			return token=list.get(index);
+		}
+		
+	}
+	
+	public void returnToken(Token token){
+		
+			index=index-1;
+			
 	}
 	public static void main(String args[]){
 		DFA fda = new DFA();
 		String str="staff,borrowers:P Person ";
 		String str1="staff==sss";
 		String str2="a' ∈  person ∩ hhh";
-		List<Token> list = fda.Scan(str2);
-		for(int i=0;i<list.size();i++){
-			System.out.println(list.get(i).getTag());
-			
-		}
+		fda.Scan(str2);
+	
 		
 	}
 }
