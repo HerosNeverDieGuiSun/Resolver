@@ -39,6 +39,8 @@ public class Key{
 				return tag.NOTBELONG;
 			case 'P':
 				return tag.POWERSET;
+			case 'F':
+				return tag.FINITE;
 			case '\'':
 				return tag.SINGLEQUOTE;
 			case ',':
@@ -70,7 +72,12 @@ public class Key{
 			return tag.RAN;
 		}else if(str.equals("==")){
 			return tag.DOUBLEEQUALITY;
-		}else{
+		}else if(str.equals("bag")){
+			return tag.BAG;
+		}else if(str.equals("seq")){
+			return tag.SEQ;
+		}
+		else{
 			return tag.ID;
 		}
 		

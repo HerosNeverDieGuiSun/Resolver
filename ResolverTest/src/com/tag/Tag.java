@@ -21,5 +21,8 @@ public enum Tag{
 	DOUBLEEQUALITY,		//表示==
 	DOT,					//圆点·
 	EXIST,ALL,				//∃   ∀
-	UNION,INTERSECTION      // ∪    ∩
+	UNION,INTERSECTION,      // ∪    ∩
+	FINITE,					// F
+	SEQ,					//seq
+	BAG						//bag	
 }

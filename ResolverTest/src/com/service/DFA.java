@@ -1,7 +1,11 @@
 package com.service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.domain.Key;
 import com.tag.Tag;
+import com.domain.Token;
 
 public class DFA {
 	
@@ -15,19 +19,42 @@ public class DFA {
 		System.out.println(key.getTag('='));
 	}
 	
-	public void Scan(String str){
+	public List<Token> Scan(String str){
 		String name ="";
+		List<Token> list = new ArrayList<Token>();
 		for(int i =0 ;i<str.length();i++){
 			//字符串逐个扫描,并加入ch中,并判断
 			char ch = str.charAt(i);
 			char chplus='`';
+			char chpluss='`';
 			if(i!=str.length()-1){
 				chplus = str.charAt(i+1);
+			}
+			if(i<str.length()-2){
+				chpluss=str.charAt(i+2);
 			}
 			//判断幂集
 			if(ch=='P'&& chplus==' '){
 				Key key  =new Key();
 				tag=key.getTag(ch);
+				Token t = new Token();
+				
+				t.setTag(tag);
+				
+				list.add(t);
+				System.out.println("tag="+tag);
+				continue;
+				
+			}
+			//判断有限集
+			if(ch=='F'&& chplus==' '){
+				Key key  =new Key();
+				tag=key.getTag(ch);
+				Token t = new Token();
+				
+				t.setTag(tag);
+				
+				list.add(t);
 				System.out.println("tag="+tag);
 				continue;
 				
@@ -47,11 +74,64 @@ public class DFA {
 				temp=temp+ch+chplus;
 				
 				tag=key.getTag(temp);
+				Token t = new Token();
+				
+				t.setTag(tag);
+				
+				list.add(t);
 				temp="";
 				i=i+1;
 				System.out.println("tag="+tag);
 				continue;
 				
+			}
+			//判断bag
+			if(ch=='b'&& chplus=='a' && chpluss=='g'){
+				if(!name.equals("")){
+					Key key  =new Key();
+					tag=key.getTag(name);
+					System.out.println("name= "+name);
+					System.out.println("tag="+tag);
+					name="";
+				}
+				Key key  =new Key();
+				String temp="";
+				temp=temp+ch+chplus+chpluss;
+				
+				tag=key.getTag(temp);
+				Token t = new Token();
+				
+				t.setTag(tag);
+				
+				list.add(t);
+				temp="";
+				i=i+2;
+				System.out.println("tag="+tag);
+				continue;
+			}
+			//判断seq
+			if(ch=='s'&& chplus=='e' && chpluss=='q'){
+				if(!name.equals("")){
+					Key key  =new Key();
+					tag=key.getTag(name);
+					System.out.println("name= "+name);
+					System.out.println("tag="+tag);
+					name="";
+				}
+				Key key  =new Key();
+				String temp="";
+				temp=temp+ch+chplus+chpluss;
+				
+				tag=key.getTag(temp);
+				Token t = new Token();
+				
+				t.setTag(tag);
+				
+				list.add(t);
+				temp="";
+				i=i+2;
+				System.out.println("tag="+tag);
+				continue;
 			}
 			if((ch>='a' && ch<='z') || (ch>='A'&& ch<='Z')||(ch=='_')){
 					
@@ -65,6 +145,11 @@ public class DFA {
 						tag=key.getTag(name);
 						System.out.println("tag="+tag);
 						tag=key.getTag(ch);
+						Token t = new Token();
+						t.setname(name);
+						t.setTag(tag);
+						
+						list.add(t);
 						System.out.println("ch= "+ch);
 						System.out.println("tag="+tag);
 						name="";
@@ -78,10 +163,20 @@ public class DFA {
 						tag=key.getTag(name);
 						System.out.println("name= "+name);
 						System.out.println("tag="+tag);
+						Token t = new Token();
+						t.setname(name);
+						t.setTag(tag);
+						
+						list.add(t);
 						name="";
 					}
 					Key key  =new Key();
 					tag=key.getTag(ch);
+		
+					Token t = new Token();
+					t.setTag(tag);
+					
+					list.add(t);
 					System.out.println("ch= "+ch);
 					System.out.println("tag="+tag);
 				}
@@ -90,16 +185,26 @@ public class DFA {
 		if(!name.equals("")){
 			Key key  =new Key();
 			tag=key.getTag(name);
+			Token t = new Token();
+			t.setname(name);
+			t.setTag(tag);
+			list.add(t);
 			System.out.println("name= "+name);
 			System.out.println("tag="+tag);
 			name="";
 		}
+		return list;
 	}
 	public static void main(String args[]){
 		DFA fda = new DFA();
 		String str="staff,borrowers:P Person ";
 		String str1="staff==sss";
-		fda.Scan(str1);
+		String str2="a' ∈  person ∩ hhh";
+		List<Token> list = fda.Scan(str2);
+		for(int i=0;i<list.size();i++){
+			System.out.println(list.get(i).getTag());
+			
+		}
 		
 	}
 }
