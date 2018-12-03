@@ -10,7 +10,7 @@ public class Test {
 	
 	public static void main(String args[]){
 		DFA dfa = new DFA();
-		String aString = "a' ∈  person ∩ hhh";
+		String aString = "dom a ⊆ seq person ∪ ran boy";
 		dfa.Scan(aString);
 		Parse parse = new Parse(dfa);
 		

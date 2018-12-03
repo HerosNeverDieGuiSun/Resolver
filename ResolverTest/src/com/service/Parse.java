@@ -26,7 +26,7 @@ public class Parse {
 		}
 		else{
 			if(tmp2.equals("是子集")){
-				str = tmp1 + "是" + tmp3 + "的子集";
+				str = tmp1 + " 是 " + tmp3 + " 的子集";
 			}else if(tmp2.equals("不是子集")){
 				str = tmp1 + "不是" + tmp3 + "的子集";
 			}else{
@@ -60,6 +60,7 @@ public class Parse {
 	public String surplus() {
 		String str = "";
 		Token token = dfa.getToken();
+		if (token == null) return "";
 		if (token.getTag() == tag.BELONG || 
 				token.getTag() == tag.EQUALITY ||
 				token.getTag() == tag.NOTBELONG ||
@@ -103,7 +104,7 @@ public class Parse {
 			str = "不属于";
 			return str;
 		}else if(token.getTag()==tag.SUBSET){
-			str = "子集";
+			str = "是子集";
 			return str;
 		}else if(token.getTag()==tag.NOTSUBSET){
 			str = "不是子集";
@@ -122,7 +123,7 @@ public class Parse {
 			Token t = dfa.getToken();
 			if (t == null) return "";
 			if(t.getTag() == tag.ID){
-				str = token.getname() + "的定义域";
+				str = t.getname() + "的定义域";
 				return str;
 			}else{
 				return "ERROR";
@@ -131,7 +132,7 @@ public class Parse {
 			Token t = dfa.getToken();
 			if (t == null) return "";
 			if(t.getTag() == tag.ID){
-				str = token.getname() + "的值域";
+				str = t.getname() + "的值域";
 				return str;
 			}else{
 				return "ERROR";
@@ -149,7 +150,7 @@ public class Parse {
 			Token t = dfa.getToken();
 			if (t == null) return "";
 			if(t.getTag() == tag.ID){
-				str =  "包"+token.getname();
+				str =  "包"+t.getname();
 				return str;
 			}else{
 				return "ERROR";
@@ -158,7 +159,7 @@ public class Parse {
 			Token t = dfa.getToken();
 			if (t == null) return "";
 			if(t.getTag() == tag.ID){
-				str =  token.getname() + "的幂集";
+				str =  t.getname() + "的幂集";
 				return str;
 			}else{
 				return "ERROR";
@@ -167,7 +168,7 @@ public class Parse {
 			Token t = dfa.getToken();
 			if (t == null) return "";
 			if(t.getTag() == tag.ID){
-				str =  token.getname() + "的有限集";
+				str =  t.getname() + "的有限集";
 				return str;
 			}else{
 				return "ERROR";
@@ -210,9 +211,9 @@ public class Parse {
 		if (token == null) return "";
 		String str = "";
 		if (token.getTag() == tag.UNION) {
-			return str + "交";
-		} else if (token.getTag() == tag.INTERSECTION) {
 			return str + "并";
+		} else if (token.getTag() == tag.INTERSECTION) {
+			return str + "交";
 		} else {
 			return "ERROR";
 		}
