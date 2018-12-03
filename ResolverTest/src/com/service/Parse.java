@@ -5,6 +5,13 @@ import com.tag.*;
 
 public class Parse {
 	public Tag tag;
+	public Token token;
+	public DFA dfa;
+	
+	public Parse(DFA dfa) {
+		this.dfa = dfa; 
+	}
+	
 	public String restraint(){
 		String str = "";
 		String tmp1 = "";
@@ -38,6 +45,7 @@ public class Parse {
 		} else {
 			str = str + variable;
 		}
+		
 		String surplus = surplus();
 		if (surplus.equals("ERROR")) {
 			str = "ERROR";
@@ -51,6 +59,17 @@ public class Parse {
 	// 剩余部分
 	public String surplus() {
 		String str = "";
+		Token token = dfa.getToken();
+		if (token.getTag() == tag.BELONG || 
+				token.getTag() == tag.EQUALITY ||
+				token.getTag() == tag.NOTBELONG ||
+				token.getTag() == tag.NOTQUELITY ||
+				token.getTag() == tag.NOTSUBSET ||
+				token.getTag() == tag.SUBSET) {
+			dfa.returnToken(token);
+			return "";
+		}
+		dfa.returnToken(token);
 		String operator = operator();
 		if (operator.equals("ERROR")) {
 			str = "ERROR";
@@ -69,7 +88,8 @@ public class Parse {
 
 	public String RelationalOperators(){
 		String str = "";
-		Token token = nexttoken();
+		token = dfa.getToken();
+		if (token == null) return str;
 		if(token.getTag()==tag.EQUALITY){
 			str = "等于";
 			return str;
@@ -77,7 +97,7 @@ public class Parse {
 			str = "不等于";
 			return str;
 		}else if(token.getTag()==tag.BELONG){
-			str = "属于";
+			str = "属于集合";
 			return str;
 		}else if(token.getTag()==tag.NOTBELONG){
 			str = "不属于";
@@ -96,72 +116,79 @@ public class Parse {
 
 	public String variable(){
 		String str = "";
-		 
-		Token token = nexttoken();
-
+		token = dfa.getToken();
+		if (token == null) return "";
 		if(token.getTag() == tag.DOM){
-			t = nexttoken();
+			Token t = dfa.getToken();
+			if (t == null) return "";
 			if(t.getTag() == tag.ID){
-				str = t.getName() + "的定义域";
+				str = token.getname() + "的定义域";
 				return str;
 			}else{
 				return "ERROR";
 			}
 		}else if(token.getTag() == tag.RAN){
-			t = nexttoken();
+			Token t = dfa.getToken();
+			if (t == null) return "";
 			if(t.getTag() == tag.ID){
-				str = t.getName() + "的值域";
+				str = token.getname() + "的值域";
 				return str;
 			}else{
 				return "ERROR";
 			}
 		}else if(token.getTag() == tag.SEQ){
-			t = nexttoken();
+			Token t = dfa.getToken();
+			if (t == null) return "";
 			if(t.getTag() == tag.ID){
-				str =  "序列"+t.getName();
+				str =  "序列"+t.getname();
 				return str;
 			}else{
 				return "ERROR";
 			}
 		}else if(token.getTag() == tag.BAG){
-			t = nexttoken();
+			Token t = dfa.getToken();
+			if (t == null) return "";
 			if(t.getTag() == tag.ID){
-				str =  "包"+t.getName();
+				str =  "包"+token.getname();
 				return str;
 			}else{
 				return "ERROR";
 			}
 		}else if(token.getTag() == tag.POWERSET){
-			t = nexttoken();
+			Token t = dfa.getToken();
+			if (t == null) return "";
 			if(t.getTag() == tag.ID){
-				str =  t.getName() + "的幂集";
+				str =  token.getname() + "的幂集";
 				return str;
 			}else{
 				return "ERROR";
 			}
 		}else if(token.getTag() == tag.FINITE){
-			t = nexttoken();
-			if(t.getTag() = tag.ID){
-				str =  t.getName() + "的有限集";
+			Token t = dfa.getToken();
+			if (t == null) return "";
+			if(t.getTag() == tag.ID){
+				str =  token.getname() + "的有限集";
 				return str;
 			}else{
 				return "ERROR";
 			}
-		}else if(token.getTag() = tag.ID){
-			t = nexttoken();
+		}else if(token.getTag() == tag.ID){
+			Token t = dfa.getToken();
+			if (t == null) return token.getname();
 			if(t.getTag() == tag.EXCLAMATORY){
-				str =  t.getName() + "（输出变量）";
+				str =  token.getname() + "（输出变量）";
 				return str;
 			}else if(t.getTag() == tag.QUESTIONMARK){
-				str =  t.getName() + "（输入变量）";
+				str =  token.getname() + "（输入变量）";
 				return str;
-			}else if(t.getTag() = tag.SINGLEQUOTE){
-				str =  t.getName() + "（后状态）";
+			}else if(t.getTag() == tag.SINGLEQUOTE){
+				str =  token.getname() + "（后状态）";
 				return str;
 			}else{
-				str = t.getName();
+				str = token.getname();
+				
+				dfa.returnToken(t);//对于多读的这个token，保存起来，给下一次调用token的函数使用
 				return str;
-				save(t);//对于多读的这个token，保存起来，给下一次调用token的函数使用
 			}
 			//对于空终结符该如何判别？
 			/*
@@ -179,7 +206,8 @@ public class Parse {
 
 	// 集合运算符
 	public String operator() {
-		Token token = nexttoken();
+		Token token = dfa.getToken();
+		if (token == null) return "";
 		String str = "";
 		if (token.getTag() == tag.UNION) {
 			return str + "交";
