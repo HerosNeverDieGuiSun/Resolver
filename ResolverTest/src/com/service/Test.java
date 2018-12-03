@@ -8,10 +8,15 @@ public class Test {
 	String str="ssss";
 	Tag tag ;
 	
-	
-	
+
 	public static void main(String args[]){
+		DFA dfa = new DFA();
+		String aString = "a' ∈  person ∩ hhh";
+		dfa.Scan(aString);
+		Parse parse = new Parse(dfa);
 		
+		System.out.println(parse.restraint());
+
 	}
 }
 

@@ -1,3 +1,5 @@
+
+
 package com.service;
 
 import java.util.ArrayList;
@@ -24,7 +26,7 @@ public class DFA {
 	public void Scan(String str){
 		String name ="";
 		list.clear();
-		List<Token> list = new ArrayList<Token>();
+		//List<Token> list = new ArrayList<Token>();
 		for(int i =0 ;i<str.length();i++){
 			//字符串逐个扫描,并加入ch中,并判断
 			char ch = str.charAt(i);
@@ -204,14 +206,16 @@ public class DFA {
 		if(index==list.size()){
 			return null;
 		}else{
-			index=index+1;
-			return token=list.get(index);
+
+			return token=list.get(index++);
 		}
 		
 	}
 	
 	public void returnToken(Token token){
-			index=index-1;	
+		
+			index=index-1;
+			
 	}
 	public static void main(String args[]){
 		DFA fda = new DFA();
@@ -219,7 +223,7 @@ public class DFA {
 		String str1="staff==sss";
 		String str2="a' ∈  person ∩ hhh";
 		fda.Scan(str2);
-		
+	
 		
 	}
 }

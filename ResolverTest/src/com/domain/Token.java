@@ -1,3 +1,4 @@
+
 package com.domain;
 import com.tag.Tag;
 
@@ -30,6 +31,7 @@ public class Token {
 		return tag;
 	}
 }
+
 
 
 
