@@ -211,9 +211,7 @@ public class DFA {
 	}
 	
 	public void returnToken(Token token){
-		
-			index=index-1;
-			
+			index=index-1;	
 	}
 	public static void main(String args[]){
 		DFA fda = new DFA();
@@ -221,7 +219,7 @@ public class DFA {
 		String str1="staff==sss";
 		String str2="a' ∈  person ∩ hhh";
 		fda.Scan(str2);
-	
+		
 		
 	}
 }
