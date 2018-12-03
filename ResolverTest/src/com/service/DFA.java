@@ -1,5 +1,4 @@
 
-
 package com.service;
 
 import java.util.ArrayList;
@@ -90,8 +89,54 @@ public class DFA {
 				continue;
 				
 			}
-			//判断bag
+			//判断dom
+			if(ch=='d'&& chplus=='o' && chpluss=='m'){
+				if(!name.equals("")){
+					Key key  =new Key();
+					tag=key.getTag(name);
+					System.out.println("name= "+name);
+					System.out.println("tag="+tag);
+					name="";
+				}
+				Key key  =new Key();
+				String temp="";
+				temp=temp+ch+chplus+chpluss;
+				
+				tag=key.getTag(temp);
+				Token t = new Token();
+				
+				t.setTag(tag);
+				
+				list.add(t);
+				temp="";
+				i=i+2;
+				System.out.println("tag="+tag);
+				continue;
+			}
 			if(ch=='b'&& chplus=='a' && chpluss=='g'){
+				if(!name.equals("")){
+					Key key  =new Key();
+					tag=key.getTag(name);
+					System.out.println("name= "+name);
+					System.out.println("tag="+tag);
+					name="";
+				}
+				Key key  =new Key();
+				String temp="";
+				temp=temp+ch+chplus+chpluss;
+				
+				tag=key.getTag(temp);
+				Token t = new Token();
+				
+				t.setTag(tag);
+				
+				list.add(t);
+				temp="";
+				i=i+2;
+				System.out.println("tag="+tag);
+				continue;
+			}
+			if(ch=='r'&& chplus=='a' && chpluss=='n'){
 				if(!name.equals("")){
 					Key key  =new Key();
 					tag=key.getTag(name);
@@ -227,3 +272,4 @@ public class DFA {
 		
 	}
 }
+
