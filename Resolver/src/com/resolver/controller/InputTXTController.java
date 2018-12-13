@@ -111,6 +111,7 @@ public class InputTXTController {
 			br = new BufferedReader(reader); 
 			String line1 ="";
 			Store store = new Store();
+			store.Split("a:P person");
 			while((line1 = br.readLine()) != null){
 				System.out.println(line1);
 				
@@ -189,7 +190,8 @@ public class InputTXTController {
 		session.setAttribute("map", map);	
 		
 		
-		String s3 = "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+		String s3 = "a:P person";
+		
 		session.setAttribute("s3", s3);
 
 		//return "index";

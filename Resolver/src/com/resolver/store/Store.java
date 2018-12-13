@@ -29,6 +29,9 @@ public class Store {
 	public String Split(String str){
 		ReadID r = new ReadID();
 		String s=r.reader(str);
+		String q=r.readerLater(str);
+		System.out.println("前一段"+s);
+		System.out.println("后一段"+q);
 		return s;
 	}
 	public List<Token> ShowTokenList(String str){

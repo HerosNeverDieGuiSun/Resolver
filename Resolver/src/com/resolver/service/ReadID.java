@@ -21,4 +21,38 @@ public class ReadID {
 		return b;
 		
 	}
+	public String readerLater(String str){
+		int start = str.indexOf(":");
+		int k=0;
+		String b ;
+		int size = str.length()-1;
+		for(int i = start+1 ; i<str.length() ;i++){
+			char ch=str.charAt(i);
+			char chplus='*';
+			char chpluss='*';
+			
+			if(i<str.length()-1){
+				 chplus=str.charAt(i+1);
+			}
+			if(i<str.length()-2){
+				 chpluss=str.charAt(i+2);
+			}
+			
+			if((ch=='P' && chplus==' ')|| (ch=='F' && chplus==' ')){
+				System.out.println("进入");
+				k=i+2;
+				break;
+			}else if((ch=='d'&&chplus=='o'&&chpluss=='m') || (ch=='s'&&chplus=='e'&&chpluss=='q')){
+				k=i+3;
+				break;
+			}else if(ch==' '){
+				continue;
+			}else{
+				k=i+1;
+				break;
+			}
+		}
+		b=str.substring(k,size+1);
+		return b;
+	}
 }
