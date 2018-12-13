@@ -30,7 +30,7 @@
         <div class="ui raised segment" style="margin-left: 11%; margin-top: 0%; height: 100%;">
             <font color="black"><h3>*生成Java代码*</h3></font>
             <div class="field">
-                <textarea  style="margin-top: 2.2%; margin-left: 2.3%; height: 730px; width: 96%;">${s3}</textarea>
+                <textarea  style="margin-top: 2.2%; margin-left: 2.3%; height: 730px; width: 96%;">${javacode}</textarea>
             </div> 
         </div>
     </div>

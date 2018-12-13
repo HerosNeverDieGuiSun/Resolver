@@ -25,7 +25,7 @@
 	            <a class="active item" style="margin-top: 30%;" href="./variableList.jsp"><font size="3">属性列表</font></a>
 	            <a class="item" href="./modelList.jsp"><font size="3">模式列表</font></a>
 	            <a class="item" href="./statisticalGraph.jsp"><font size="3">统计信息</font></a> 
-	            <a class="item" href="./javaCode.jsp"><font size="3">生成代码</font></a>
+	            
 	        </div>
 	        <div class="ui raised segment" style="margin-left: 11%; margin-top: 0%; height: 100%;">
 	            <font color="black"><h3>*变量(包括模式)*</h3></font>

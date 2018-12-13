@@ -43,7 +43,6 @@
 	            <a class="item" style="margin-top: 30%;" href="./variableList.jsp"><font size="3">属性列表</font></a>
 	            <a class="item" href="./modelList.jsp"><font size="3">模式列表</font></a>
 	            <a class="active item" href="./statisticalGraph.jsp"><font size="3">统计信息</font></a> 
-	            <a class="item" href="./javaCode.jsp"><font size="3">生成代码</font></a>
 	        </div>
 	    <section id="container">
    

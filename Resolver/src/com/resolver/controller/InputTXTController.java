@@ -21,6 +21,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.resolver.service.ConvertToJava;
+import com.resolver.service.ReadID;
 import com.resolver.store.*;
 import com.resolver.tool.Count;
 import com.resolver.tool.Key;
@@ -103,17 +105,23 @@ public class InputTXTController {
 		}
 		BufferedReader br = null;
 		String line2="";
+		Map<String, String> codeMap = new HashMap<String, String>();
+		String classString="";
 		try {
 			FileInputStream fileInputStream = new FileInputStream(path+newname);
 			System.out.println(path+newname);
 			//BufferedInputStream bufferedInputStream = new BufferedInputStream(fileInputStream);
 			InputStreamReader reader = new InputStreamReader(fileInputStream,"Unicode"); 
 			br = new BufferedReader(reader); 
+			classString= br.readLine();
 			String line1 ="";
+			ReadID readId = new ReadID();
 			Store store = new Store();
-			store.Split("a:P person");
 			while((line1 = br.readLine()) != null){
 				System.out.println(line1);
+				if(readId.reader(line1)!=null && readId.readerLater(line1)!=null){
+					codeMap.put(readId.reader(line1), readId.readerLater(line1));
+				}
 				
 				transList.add(store.Deal(line1));
 				bigList.addAll(store.ShowTokenList(line1));
@@ -156,8 +164,12 @@ public class InputTXTController {
 			}
 		}
 		
+		ConvertToJava convert = new ConvertToJava();
+		String convertClass = convert.generateClass(classString);
+		String body = convert.convert(codeMap);
+		String finalJava = convertClass + body+"}";
 		
-		
+		session.setAttribute("javacode", finalJava);
 		session.setAttribute("bigList", bigList);
 		session.setAttribute("transList", transList);
 		session.setAttribute("countList",countList);
@@ -190,9 +202,7 @@ public class InputTXTController {
 		session.setAttribute("map", map);	
 		
 		
-		String s3 = "a:P person";
 		
-		session.setAttribute("s3", s3);
 
 		//return "index";
 		return "variableList";
